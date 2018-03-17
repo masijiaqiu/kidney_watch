@@ -34,8 +34,35 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+	<script type="text/javascript">
+		function $_GET(param) {
+			var vars = {};
+			window.location.href.replace( location.hash, '' ).replace( 
+				/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+				function( m, key, value ) { // callback
+					vars[key] = value !== undefined ? value : '';
+				}
+			);
+
+			if ( param ) {
+				return vars[param] ? vars[param] : null;	
+			}
+			return vars;
+		}
+
+		function loadDiagram() {
+			var num = $_GET('num');
+			document.getElementById('diagram').src = "images/work_" + num + ".jpg";
+			// img.class = "img-responsive";
+			document.getElementById('diaHead').innerHTML = "Diagram Title " + num;
+			document.getElementById('description').innerHTML = "Detailed Description for " + num;
+			document.getElementById('rawData').innerHTML = "Some raw data for " + num;
+
+		}
+	</script>
+
 	</head>
-	<body>
+	<body onload="loadDiagram()">
 
 	<div id="fh5co-page">
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
@@ -59,17 +86,16 @@
 
 					<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
 						<figure class="text-center">
-							<img src="images/work.jpg" alt="Free HTML5 Bootstrap" class="img-responsive">
+							<img id="diagram" src="images/work.jpg" alt="Population Diagram" class="img-big">
 						</figure>
 					</div>
 					
 					<div class="col-md-8 col-md-offset-2 animate-box" data-animate-effect="fadeInLeft">
 						
 						<div class="col-md-9 col-md-push-3">
-							<h1>Diagram Title</h1>
-							<p>Detailed Description.</p>
-
-							<p>Some raw data.</p>
+							<h1 id="diaHead">Diagram Title</h1>
+							<p id="description">Detailed Description.</p>
+							<p id="rawData">Some raw data.</p>
 						</div>
 
 					</div>
