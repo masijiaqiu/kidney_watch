@@ -22,11 +22,12 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
 body {
-  background: #456;
+  /*background: #456;*/
+  background: #444;
   font-family: 'Open Sans', sans-serif;
 }
 
-.login {
+.login { 
   width: 400px;
   margin: 16px auto;
   font-size: 16px;
@@ -45,11 +46,13 @@ body {
   margin-right: auto;
   margin-left: auto;
   border: 12px solid transparent;
-  border-bottom-color: #28d;
+  /*border-bottom-color: #28d;*/
+  border-bottom-color: #991404;
 }
 
 .login-header {
-  background: #28d;
+  /*background: #28d;*/
+  background: #991404;
   padding: 20px;
   font-size: 1.4em;
   font-weight: normal;
@@ -94,14 +97,16 @@ body {
 }
 
 .login input[type="submit"] {
-  background: #28d;
+  /*background: #28d;*/
+  background: #991404;
   border-color: transparent;
   color: #fff;
   cursor: pointer;
 }
 
 .login input[type="submit"]:hover {
-  background: #17c;
+  /*background: #17c;*/
+  background: #996444;
 }
 
 /* Buttons' focus effect */
