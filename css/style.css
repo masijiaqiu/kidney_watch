@@ -274,12 +274,10 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 
 .work-item {
   margin-bottom: 30px;
-}
-.work-item a {
   border: none;
   text-align: center;
 }
-.work-item a img {
+.work-item img {
   margin-bottom: 10px;
   float: left;
   border: 10px solid transparent;
@@ -287,20 +285,20 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   -o-transition: 0.5s;
   transition: 0.5s;
 }
-.work-item a h3 {
+.work-item h3 {
   font-size: 20px;
   color: #000;
   margin-bottom: 10px;
 }
-.work-item a p {
+.work-item p {
   font-size: 14px;
   color: #cccccc;
   margin-bottom: 0;
 }
-.work-item a:hover, .work-item a:active, .work-item a:focus {
+.work-item:hover, .work-item:active, .work-item:focus {
   text-decoration: none;
 }
-.work-item a:hover img, .work-item a:active img, .work-item a:focus img {
+.work-item:hover img, .work-item:active img, .work-item:focus img {
   border: 10px solid #000;
 }
 

@@ -34,13 +34,21 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+	<script type="text/javascript">
+
+		function handleClick(num) {
+			window.location.href = "work.html?num=" + num;
+		}
+
+	</script>
+
 	</head>
 	<body>
 	<div id="fh5co-page">
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
 
-			<h1 id="fh5co-logo"><a href="index.html"><img src="images/logo.png" alt="Free HTML5 Bootstrap Website Template"></a></h1>
+			<h1 id="fh5co-logo"><a href="index.html"><img src="images/logo.png" alt="KidneyWatch"></a></h1>
 			<nav id="fh5co-main-menu" role="navigation">
 				<ul>
 					<li class="fh5co-active"><a href="index.html">Home</a></li>
@@ -52,8 +60,49 @@
 		</aside>
 
 		<div id="fh5co-main">
+
 			<div class="fh5co-narrow-content">
 				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Welcome to KidneyWatch: Population</h2>
+
+				<div class="row animate-box" data-animate-effect="fadeInLeft">
+
+					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
+						<img src="images/work_1.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(1)">
+						<h3 class="fh5co-work-title">Diagram Title Here</h3>
+						<p>Brief Description</p>
+					</div>
+					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
+						<img src="images/work_2.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(2)">
+						<h3 class="fh5co-work-title">Diagram Title Here</h3>
+						<p>Brief Description</p>
+					</div>
+					<div class="clearfix visible-sm-block"></div>
+					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
+						<img src="images/work_3.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(3)">
+						<h3 class="fh5co-work-title">Diagram Title Here</h3>
+						<p>Brief Description</p>
+					</div>
+					<div class="clearfix visible-md-block"></div>
+					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
+						<img src="images/work_4.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(4)">
+						<h3 class="fh5co-work-title">Diagram Title Here</h3>
+						<p>Brief Description</p>
+					</div>
+					<div class="clearfix visible-sm-block"></div>
+					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
+						<img src="images/work_5.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(5)">
+						<h3 class="fh5co-work-title">Diagram Title Here</h3>
+						<p>Brief Description</p>
+					</div>
+					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
+						<img src="images/work_6.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(6)">
+						<h3 class="fh5co-work-title">Diagram Title Here</h3>
+						<p>Brief Description</p>
+					</div>
+					<div class="clearfix visible-md-block visible-sm-block"></div>
+					<div class="clearfix visible-md-block"></div>
+					
+				</div>
 			</div>
 		</div>
 	</div>
