@@ -34,6 +34,15 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+	<script type="text/javascript">
+
+		function submit() {
+			document.getElementById("individual-report").style.display="block";
+		}
+
+	</script>
+
+
 	</head>
 	<body>
 	<div id="fh5co-page">
@@ -54,6 +63,39 @@
 		<div id="fh5co-main">
 			<div class="fh5co-narrow-content">
 				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Welcome to KidneyWatch: Individual</h2>
+
+				
+
+				<form action="javascript:submit()">
+				<div>
+					<label for="party">Patient ID:</label>
+	    			<input type="text" id="patientid" name="patientid">
+	    			<span class="validity"></span>
+				</div>
+  				<div>
+	    			<label for="party">Starting Date:</label>
+	    			<input type="date" id="party" name="party" min="2015-04-01" max="2017-03-20" required>
+	    			<span class="validity"></span>
+  				</div>
+  				<div>
+	    			<label for="party">Ending Date:</label>
+	    			<input type="date" id="party" name="party" min="2015-04-01" max="2017-03-20" required>
+	    			<span class="validity"></span>
+  				</div>
+  				<div>
+
+    				<input type="submit" >
+  				</div>
+
+  				<div id="individual-report" style="display:none;">
+  					<img src="images/func_identification.jpeg" class="img-responsive" alt="Function Identification">
+  				</div>
+				</form>
+
+				<div>
+					
+				</div>
+
 			</div>
 		</div>
 	</div>
