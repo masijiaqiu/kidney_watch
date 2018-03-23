@@ -23,6 +23,11 @@ public class GreetingController {
         return "population";
     }
 
+    @GetMapping("/mkck")
+    public String mkck(Model model) {
+        return "mkck";
+    }
+
     @GetMapping("/work")
     public String work(Model model) {
         return "work";

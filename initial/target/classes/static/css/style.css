@@ -1114,4 +1114,52 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   opacity: 0;
 }
 
+
+table.pop-table {
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid #1C6EA4;
+  background-color: #FAFAFA;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.pop-table td, table.pop-table th {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
+}
+table.pop-table tbody td {
+  font-size: 13px;
+}
+table.pop-table tr:nth-child(even) {
+  background: #E3F3FF;
+}
+table.pop-table thead {
+  background: #1C6EA4;
+  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+}
+table.pop-table thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  border-left: 2px solid #D0E4F5;
+}
+table.pop-table thead th:first-child {
+  border-left: none;
+}
+
+table.pop-table tfoot td {
+  font-size: 14px;
+}
+table.pop-table tfoot .links {
+  text-align: right;
+}
+table.pop-table tfoot .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
 /*# sourceMappingURL=style.css.map */
