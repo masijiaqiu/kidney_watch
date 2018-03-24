@@ -1,2 +1,8 @@
-hello/GreetingController.class
+hello/MainController.class
+hello/PatientRepository.class
 hello/Application.class
+hello/EGFR.class
+hello/Patient.class
+hello/ACRRepository.class
+hello/ACR.class
+hello/EGFRRepository.class
