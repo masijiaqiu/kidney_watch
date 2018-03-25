@@ -12,6 +12,8 @@ public class EGFR {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    private Long pid;
+
     private Double egfr;
 
     private Date testDate;
@@ -22,6 +24,14 @@ public class EGFR {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getPid() {
+		return pid;
+	}
+
+	public void setPid(Long pid) {
+		this.id = pid;
 	}
 
 	public Double getEgfr() {

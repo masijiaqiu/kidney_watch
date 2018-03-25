@@ -11,6 +11,10 @@ import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+import java.lang.Integer;
 
 import hello.Patient;
 import hello.PatientRepository;
@@ -33,13 +37,6 @@ public class MainController {
     	List<Patient> patients = new ArrayList<>();
 	    patientRepository.findAll().forEach(patients::add);
 	    model.addAttribute("patients", patients);
-	    // Patient patient = patients.get(0);
-	    // model.addAttribute("name", patient.getName());
-	    // model.addAttribute("gender", patient.getGender());
-	    // model.addAttribute("age", patient.getAge());
-	    // model.addAttribute("name", "Jane");
-	    // model.addAttribute("gender", "F");
-	    // model.addAttribute("age", 23);
 
         return "home";
     }
@@ -49,14 +46,33 @@ public class MainController {
         return "individual";
     }
 
-    @GetMapping("/population")
-    public String population(Model model) {
-        return "population";
-    }
+    // @GetMapping("/population")
+    // public String population(Model model) {
+    //     return "population";
+    // }
 
     @GetMapping("/mkck")
     public String mkck(Model model) {
+	    model.addAttribute("patients", getCategoryPatients(1));
         return "mkck";
+    }
+
+    @GetMapping("/pd")
+    public String pd(Model model) {
+	    model.addAttribute("patients", getCategoryPatients(2));
+        return "pd";
+    }
+
+    @GetMapping("/hd")
+    public String hd(Model model) {
+    	model.addAttribute("patients", getCategoryPatients(3));
+        return "hd";
+    }
+
+    @GetMapping("/ahd")
+    public String ahd(Model model) {
+    	model.addAttribute("patients", getCategoryPatients(4));
+        return "ahd";
     }
 
     @GetMapping("/work")
@@ -69,6 +85,17 @@ public class MainController {
 		return patientRepository.findAll();
 	}
 
+	public List<Patient> getCategoryPatients(int flag) {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getCategory() == flag){
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients;
+	}
+
 	// @GetMapping("/patients/{id}")
 	// public Patient getPatientById(@PathVariable(value = "id") Long patientId) {
 	//     return patientRepository.findById(patientId);
@@ -76,7 +103,10 @@ public class MainController {
 
 	@GetMapping(path="/add") // Map ONLY GET Requests
 	public @ResponseBody String addNewPatient (@RequestParam String name
-			, @RequestParam String gender, @RequestParam Integer age) {
+			, @RequestParam String gender, @RequestParam Integer age
+			, @RequestParam Double egfr, @RequestParam Integer date
+			, @RequestParam Double rate, @RequestParam Integer category
+			, @RequestParam Boolean smoking, @RequestParam Boolean cancer) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 
@@ -84,6 +114,19 @@ public class MainController {
 		n.setName(name);
 		n.setGender(gender);
 		n.setAge(age);
+		n.setEgfr(egfr);
+
+		Date testDate = new Date();
+		try {
+			testDate = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(date));
+		} catch (Exception e) {
+
+		}
+		n.setCategory(category);
+		n.setTestDate(testDate);
+		n.setRate(rate);
+		n.setSmoking(smoking);
+		n.setCancer(cancer);
 		patientRepository.save(n);
 		return "Saved";
 	}
