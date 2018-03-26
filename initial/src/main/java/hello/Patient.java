@@ -34,7 +34,7 @@ public class Patient {
 
     private Boolean depression;
 
-    private Integer category; 
+    private String category; 
     // 1: MKCK
     // 2: PD
     // 3: HD
@@ -136,11 +136,11 @@ public class Patient {
 		this.depression = depression;
 	}
 
-	public Integer getCategory() {
+	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(Integer category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 }

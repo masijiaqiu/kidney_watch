@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>KidneyWatch</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="KidneyWatch" />
+	<meta name="keywords" content="KidneyWatch" />
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" th:href="@{/css/animate.css}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" th:href="@{/css/icomoon.css}"> 
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}"> 
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}"> 
+	<link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}"> 
+	<!-- Theme style  -->
+	<link rel="stylesheet" th:href="@{/css/style.css}"> 
+
+	<!-- Modernizr JS -->
+	<script th:src="@{/js/modernizr-2.6.2.min.js}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script th:src="@{/js/respond.min.js}"></script>
+	<![endif]-->
+
+	<script type="text/javascript">
+
+		function submit() {
+			var pid = document.getElementById("patientid").value;
+			window.location.href = "/individual?pid=" + pid;
+		}
+
+	</script>
+
+
+	</head>
+	<body>
+	<div id="fh5co-page">
+		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
+
+			<h1 id="fh5co-logo"><a href="/home"><img src="images/logo.png" alt="KidneyWatch"></a></h1>
+			<nav id="fh5co-main-menu" role="navigation">
+				<ul>
+					<li class="fh5co-active"><a href="/home">Home</a></li>
+					<br>
+					<li><a href="/search">Search</a></li>
+					<li><a href="/mkck">MKCK</a></li>
+					<li><a href="/pd">PD</a></li>
+					<li><a href="/hd">HD</a></li>
+					<li><a href="/ahd">AHD</a></li>
+				</ul>
+			</nav>
+		</aside>
+
+		<div id="fh5co-main">
+			<div class="fh5co-narrow-content">
+				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Welcome to KidneyWatch: Individual</h2>
+
+				
+				<div class="animate-box">
+					<form action="javascript:submit()">
+					<div>
+						<label for="party">Patient ID:</label>
+		    			<input type="text" id="patientid" name="patientid">
+		    			<span class="validity"></span>
+					</div>
+	  				<div>
+		    			<label for="party">Starting Date:</label>
+		    			<input type="date" id="party" name="party" min="2015-04-01" max="2017-03-20" required>
+		    			<span class="validity"></span>
+	  				</div>
+	  				<div>
+		    			<label for="party">Ending Date:</label>
+		    			<input type="date" id="party" name="party" min="2015-04-01" max="2017-03-20" required>
+		    			<span class="validity"></span>
+	  				</div>
+	  				<div>
+
+	    				<input type="submit" >
+	  				</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<!-- jQuery Easing -->
+	<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+	<!-- Bootstrap -->
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<!-- Carousel -->
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<!-- Stellar -->
+	<script th:src="@{/js/jquery.stellar.min.js}"></script>
+	<!-- Waypoints -->
+	<script th:src="@{/js/jquery.waypoints.min.js}"></script>
+	<!-- Counters -->
+	<script th:src="@{/js/jquery.countTo.js}"></script>
+	
+	
+	<!-- MAIN JS -->
+	<script th:src="@{/js/main.js}"></script>
+
+	</body>
+</html>
+

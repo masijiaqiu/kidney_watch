@@ -37,7 +37,8 @@
 	<script type="text/javascript">
 
 		function submit() {
-			document.getElementById("individual-report").style.display="block";
+			var pid = document.getElementById("patientid").value;
+			window.location.href = "/individual?pid=" + pid;
 		}
 
 	</script>
@@ -54,11 +55,11 @@
 				<ul>
 					<li class="fh5co-active"><a href="/home">Home</a></li>
 					<br>
-					<li><a href="/individual">Search</a></li>
+					<li><a href="/search">Search</a></li>
 					<li><a href="/mkck">MKCK</a></li>
-					<li><a href="/population">PD</a></li>
-					<li><a href="/population">HD</a></li>
-					<li><a href="/population">AHD</a></li>
+					<li><a href="/pd">PD</a></li>
+					<li><a href="/hd">HD</a></li>
+					<li><a href="/ahd">AHD</a></li>
 				</ul>
 			</nav>
 		</aside>
@@ -86,14 +87,53 @@
 		    			<span class="validity"></span>
 	  				</div>
 	  				<div>
-
 	    				<input type="submit" >
 	  				</div>
+	  				</form>
 
-	  				<div id="individual-report" style="display:none;">
-	  					<img src="images/func_identification.jpeg" class="img-responsive" alt="Function Identification">
-	  				</div>
-					</form>
+	  				<div name="mkck main table" id="individual-report" class="row">
+						<table class="pop-table" border="0">
+						  <thead>
+							<tr>
+								<th>Patient ID</th>
+								<th>Name</th>
+								<th>Age</th>
+								<th>Gender</th>
+								<th>Smoking</th>
+								<th>Cancer</th>
+								<th>Category</th>
+							</tr>
+						  </thead>
+						  <tbody>
+							<tr th:each="p:${patient}">
+								<td th:text="${p.id}" />
+								<td th:text="${p.name}" />
+								<td th:text="${p.age}" />
+								<td th:text="${p.gender}" />
+								<td th:text="${p.smoking}" />
+								<td th:text="${p.cancer}" />
+								<td th:text="${p.category}" />
+							</tr>
+						  </tbody>
+						</table>
+					</div>
+
+					<div name="mkck main table" id="egfr-results" class="row">
+						<table class="pop-table" border="0">
+						  <thead>
+							<tr>
+								<th>Date</th>
+								<th>Value</th>
+							</tr>
+						  </thead>
+						  <tbody>
+							<tr th:each="re:${egfrs}">
+								<td th:text="${re.testDate}" />
+								<td th:text="${re.value}" />
+							</tr>
+						  </tbody>
+						</table>
+					</div>
 				</div>
 
 			</div>
