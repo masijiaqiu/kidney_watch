@@ -38,7 +38,9 @@
 
 		function submit() {
 			var pid = document.getElementById("patientid").value;
-			window.location.href = "/individual?pid=" + pid;
+			var sdate = document.getElementById("sdate").value;
+			var edate = document.getElementById("edate").value;
+			window.location.href = "/individual?pid=" + pid + "&sdate=" + sdate + "&edate=" + edate;
 		}
 
 	</script>
@@ -78,12 +80,12 @@
 					</div>
 	  				<div>
 		    			<label for="party">Starting Date:</label>
-		    			<input type="date" id="party" name="party" min="2015-04-01" max="2017-03-20" required>
+		    			<input type="date" id="sdate" name="party" min="2015-04-01" max="2017-03-20" required>
 		    			<span class="validity"></span>
 	  				</div>
 	  				<div>
 		    			<label for="party">Ending Date:</label>
-		    			<input type="date" id="party" name="party" min="2015-04-01" max="2017-03-20" required>
+		    			<input type="date" id="edate" name="party" min="2015-04-01" max="2017-03-20" required>
 		    			<span class="validity"></span>
 	  				</div>
 	  				<div>
@@ -91,8 +93,7 @@
 	  				</div>
 	  				</form>
 
-	  				<div class="fh5co-narrow-content fh5co-border-bottom">
-	  				<div name="mkck main table" id="individual-report" class="row">
+	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
 						<table class="pop-table" border="0">
 						  <thead>
 							<tr>
@@ -119,7 +120,7 @@
 						</table>
 					</div>
 
-					<div name="mkck main table" id="egfr-results" class="row">
+					<div name="mkck main table" id="egfr-results" class="fh5co-narrow-content fh5co-border-bottom row">
 						<table class="pop-table" border="0">
 						  <thead>
 							<tr>
@@ -134,7 +135,6 @@
 							</tr>
 						  </tbody>
 						</table>
-					</div>
 					</div>
 				</div>
 

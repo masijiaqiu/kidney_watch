@@ -48,12 +48,22 @@ public class MainController {
     }
 
     @GetMapping("/individual")
-    public String individual(Model model, @RequestParam Long pid) {
+    public String individual(Model model, @RequestParam Long pid
+    	, @RequestParam String sdate, @RequestParam String edate) {
     	try{
 	    	Patient p = patientRepository.findById(pid).get();
 	    	model.addAttribute("patient", p);
 
-	    	model.addAttribute("egfrs", getEgfrByPid(pid));
+	    	Date start = new Date();
+	    	Date end = new Date();
+
+	    	try {
+		    	start = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
+		    	end = new SimpleDateFormat("yyyy-MM-dd").parse(edate);
+		    } catch (Exception e) {
+
+			}
+	    	model.addAttribute("egfrs", getEgfrByPidWithDate(pid, start, end));
 	    } catch (Exception e) {
 
 	    }
@@ -115,11 +125,11 @@ public class MainController {
 	    return patients;
 	}
 
-	public List<EGFR> getEgfrByPid(Long id) {
+	public List<EGFR> getEgfrByPidWithDate(Long id, Date sdate, Date edate) {
 		List<EGFR> egfrs = new ArrayList<>();
     	Iterable<EGFR> iterator = egfrRepository.findAll();
 	    for(EGFR e: iterator) {
-	    	if (e.getPid() == id) {
+	    	if (e.getPid() == id && e.getTestDate().after(sdate) && e.getTestDate().before(edate)) {
 	    		egfrs.add(e);
 	    	}
 	    }
@@ -136,7 +146,7 @@ public class MainController {
 			, @RequestParam String gender, @RequestParam Integer age
 			, @RequestParam Double egfr, @RequestParam Integer date
 			, @RequestParam Double rate, @RequestParam String category
-			, @RequestParam Boolean smoking, @RequestParam Boolean cancer) {
+			, @RequestParam String smoking, @RequestParam String cancer) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 
