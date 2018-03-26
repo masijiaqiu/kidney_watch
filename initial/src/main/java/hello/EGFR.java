@@ -31,7 +31,7 @@ public class EGFR {
 	}
 
 	public void setPid(Long pid) {
-		this.id = pid;
+		this.pid = pid;
 	}
 
 	public Double getEgfr() {

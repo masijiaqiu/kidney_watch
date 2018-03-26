@@ -91,6 +91,7 @@
 	  				</div>
 	  				</form>
 
+	  				<div class="fh5co-narrow-content fh5co-border-bottom">
 	  				<div name="mkck main table" id="individual-report" class="row">
 						<table class="pop-table" border="0">
 						  <thead>
@@ -129,10 +130,11 @@
 						  <tbody>
 							<tr th:each="re:${egfrs}">
 								<td th:text="${re.testDate}" />
-								<td th:text="${re.value}" />
+								<td th:text="${re.egfr}" />
 							</tr>
 						  </tbody>
 						</table>
+					</div>
 					</div>
 				</div>
 

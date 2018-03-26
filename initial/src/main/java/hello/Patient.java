@@ -24,13 +24,13 @@ public class Patient {
 
     private Double rate;
 
+    private String cancer;
+
+    private String smoking;
+
     private Boolean htn;
 
-    private Boolean cancer;
-
     private Boolean diabetes;
-
-    private Boolean smoking;
 
     private Boolean depression;
 
@@ -96,6 +96,22 @@ public class Patient {
 		this.rate = rate;
 	}
 
+	public String getCancer() {
+		return cancer;
+	}
+
+	public void setCancer(String cancer) {
+		this.cancer = cancer;
+	}
+
+	public String getSmoking() {
+		return smoking;
+	}
+
+	public void setSmoking(String smoking) {
+		this.smoking = smoking;
+	}
+
 	public Boolean getHtn() {
 		return htn;
 	}
@@ -104,28 +120,12 @@ public class Patient {
 		this.htn = htn;
 	}
 
-	public Boolean getCancer() {
-		return cancer;
-	}
-
-	public void setCancer(Boolean cancer) {
-		this.cancer = cancer;
-	}
-
 	public Boolean getDiabetes() {
 		return diabetes;
 	}
 
 	public void setDiabetes(Boolean diabetes) {
 		this.diabetes = diabetes;
-	}
-
-	public Boolean getSmoking() {
-		return smoking;
-	}
-
-	public void setSmoking(Boolean smoking) {
-		this.smoking = smoking;
 	}
 
 	public Boolean getDepression() {

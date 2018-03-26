@@ -99,6 +99,11 @@ public class MainController {
 		return patientRepository.findAll();
 	}
 
+	@GetMapping("/egfrs")
+    public @ResponseBody Iterable<EGFR> getAllEgfrs() {
+		return egfrRepository.findAll();
+	}
+
 	public List<Patient> getCategoryPatients(String category) {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();

@@ -91,7 +91,7 @@
 	  				</div>
 	  				</form>
 
-	  				<div name="mkck main table" id="individual-report" class="row">
+	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
 						<table class="pop-table" border="0">
 						  <thead>
 							<tr>
@@ -118,7 +118,7 @@
 						</table>
 					</div>
 
-					<div name="mkck main table" id="egfr-results" class="row">
+					<div name="mkck main table" id="egfr-results" class="fh5co-narrow-content fh5co-border-bottom row">
 						<table class="pop-table" border="0">
 						  <thead>
 							<tr>
@@ -129,7 +129,7 @@
 						  <tbody>
 							<tr th:each="re:${egfrs}">
 								<td th:text="${re.testDate}" />
-								<td th:text="${re.value}" />
+								<td th:text="${re.egfr}" />
 							</tr>
 						  </tbody>
 						</table>
