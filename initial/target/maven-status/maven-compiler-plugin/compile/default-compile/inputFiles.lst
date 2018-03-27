@@ -1,9 +1,9 @@
 /Users/lucasmeng/kidney_watch/initial/src/main/java/hello/ACR.java
 /Users/lucasmeng/kidney_watch/initial/src/main/java/hello/MainController.java
-/Users/lucasmeng/kidney_watch/initial/src/main/java/hello/EGFRRepository.java
+/Users/lucasmeng/kidney_watch/initial/src/main/java/hello/LabTestRepository.java
 /Users/lucasmeng/kidney_watch/initial/src/main/java/hello/GreetingController.java
-/Users/lucasmeng/kidney_watch/initial/src/main/java/hello/EGFR.java
 /Users/lucasmeng/kidney_watch/initial/src/main/java/hello/ACRRepository.java
 /Users/lucasmeng/kidney_watch/initial/src/main/java/hello/PatientRepository.java
 /Users/lucasmeng/kidney_watch/initial/src/main/java/hello/Patient.java
 /Users/lucasmeng/kidney_watch/initial/src/main/java/hello/Application.java
+/Users/lucasmeng/kidney_watch/initial/src/main/java/hello/LabTest.java
