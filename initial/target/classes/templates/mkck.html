@@ -106,9 +106,9 @@
 
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
 					<div name="mkck intro" class="row">
-						<li>xxx patients in total</li>
-						<li>xxx patients getting better</li>
-						<li>xxx patients getting worse</li>
+						<li th:text="${total} + ' patients in total'"/>
+						<li th:text="${better} + ' patients getting better'"/>
+						<li th:text="${worse} + ' patients getting worse'"/>
 					</div>
 				</div>
 			</div>

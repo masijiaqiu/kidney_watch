@@ -36,6 +36,16 @@ public class MainController {
     	List<Patient> patients = new ArrayList<>();
 	    patientRepository.findAll().forEach(patients::add);
 	    model.addAttribute("patients", patients);
+	    model.addAttribute("total", patients.size());
+
+	    int better = getBetterPatients();
+	    int worse = getWorsePatients();
+	    model.addAttribute("better", better);
+	    model.addAttribute("worse", worse);
+	    int male = countPatientsByGender("M");
+	    int female = countPatientsByGender("F");
+	    model.addAttribute("male", male);
+	    model.addAttribute("female", female);
 
         return "home";
     }
@@ -75,7 +85,17 @@ public class MainController {
 
     @GetMapping("/mkck")
     public String mkck(Model model) {
-	    model.addAttribute("patients", getCategoryPatients("MKCK"));
+    	List<Patient> patients = getCategoryPatients("MKCK");
+	    model.addAttribute("patients", patients);
+	    model.addAttribute("total", patients.size());
+	    int better = getBetterPatientsByCategory("MKCK");
+	    int worse = getWorsePatientsByCategory("MKCK");
+	    model.addAttribute("better", better);
+	    model.addAttribute("worse", worse);
+	    int male = countPatientsByGenderWithCategory("MKCK", "M");
+	    int female = countPatientsByGenderWithCategory("MKCK", "F");
+	    model.addAttribute("male", male);
+	    model.addAttribute("female", female);
         return "mkck";
     }
 
@@ -121,6 +141,72 @@ public class MainController {
 	    	}
 	    }
 	    return patients;
+	}
+
+	public int getBetterPatients() {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getRate() > 0 ) {
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients.size();
+	}
+
+	public int getWorsePatients() {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getRate() < 0 ) {
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients.size();
+	}
+
+	public int getBetterPatientsByCategory(String category) {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getCategory().equals(category) && p.getRate() > 0 ) {
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients.size();
+	}
+
+	public int getWorsePatientsByCategory(String category) {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getCategory().equals(category) && p.getRate() < 0 ) {
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients.size();
+	}
+
+	public int countPatientsByGenderWithCategory(String category, String gender) {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getCategory().equals(category) && p.getGender().equals(gender) ) {
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients.size();
+	}
+
+	public int countPatientsByGender(String gender) {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getGender().equals(gender) ) {
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients.size();
 	}
 
 	public List<LabTest> getLabTestsByPidWithDate(Long id, Date sdate, Date edate) {
