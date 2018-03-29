@@ -17,3 +17,7 @@ curl 'localhost:8080/lab?pid=1&labName=eGFR&labValue=23&labUnit=&date=20170320'
 curl 'localhost:8080/lab?pid=1&labName=eGFR&labValue=24&labUnit=&date=20170318'
 
 
+MKCK (pre-dialysis patients) eGFR > 15
+PD (peritoneal dialysis patients)
+HD (hemodialysis patients)
+AHD (acute hemodialysis patients)

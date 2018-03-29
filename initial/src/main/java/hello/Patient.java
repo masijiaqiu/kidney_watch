@@ -12,46 +12,45 @@ public class Patient {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    private String name;
-
-    private String gender;
-
-    private Integer age;
+    private String pid;
+    private String firstName;
+    private String lastName;
+    private String gender; // M; F
+    private String dob;
+    private String category; // MKCK, PD, HD, AHD
 
     private Double egfr;
+    private String testDate;
+    private Double changeRate;
 
-    private Date testDate;
-
-    private Double rate;
-
+    // Yes or No
     private String cancer;
-
+    private String cancerNotes;
     private String smoking;
+    private String smokingNotes;
+    private String htn;
+    private String htnNotes;
+    private String diabetes;
+    private String diabetesNotes;
+    private String depression;
+    private String depressionNotes;
 
-    private Boolean htn;
+    // Yes or No
+    private String asprin;
+    private String amitriptyline;
+    private String metformin;
+    private String furosemide;
 
-    private Boolean diabetes;
 
-    private Boolean depression;
-
-    private String category; 
-    // 1: MKCK
-    // 2: PD
-    // 3: HD
-    // 4: AHD
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	public Long getId() return this.id; 
+	public void setId(Long id) this.id = id;
+	
+	public String getPid() return this.pid;
+	public void setPid(String pid) this.pid = pid;
 
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}

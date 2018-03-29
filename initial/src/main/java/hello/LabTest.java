@@ -12,7 +12,7 @@ public class LabTest {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    private Long pid;
+    private String pid;
 
     private String labName;
 
@@ -20,7 +20,7 @@ public class LabTest {
 
     private String labUnit;
 
-    private Date testDate;
+    private String testDate;
 
 	public Long getId() {
 		return id;

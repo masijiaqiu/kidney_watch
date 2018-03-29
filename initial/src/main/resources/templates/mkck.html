@@ -42,6 +42,10 @@
 			window.location.href = "/work?num=" + num;
 		}
 
+		function displayPatients(category, trend) {
+			window.location.href = "/patients?category=" + category + "&trend=" + trend; 
+		}
+
 		function sortTable(table, col, reverse) {
 		    var tb = table.tBodies[0], // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
 		        tr = Array.prototype.slice.call(tb.rows, 0), // put rows into array
@@ -106,10 +110,9 @@
 
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
 					<div name="mkck intro" class="row">
-						<li th:text="${total} + ' patients in total'"/>
-						<li th:text="'Male: ' + ${male} + '; Female: ' + ${female}"/>
-						<li th:text="${better} + ' patients are getting better'"/>
-						<li th:text="${worse} + ' patients are getting worse'"/>
+						<li th:text="${total} + ' patients in total (Male: ' + ${male} + '; Female: ' + ${female} + ')'"/>
+						<li th:text="${better} + ' patients are getting better'" onclick="displayPatients('mkck', 'better')"/>
+						<li th:text="${worse} + ' patients are getting worse'" onclick="displayPatients('mkck', 'worse')"/>
 					</div>
 				</div>
 			</div>
@@ -152,6 +155,7 @@
 								<th>+/- eGFR/mon</th>
 								<th>Smoker</th>
 								<th>Cancer</th>
+								<th>Score</th>
 							</tr>
 						  </thead>
 						  <tbody>
@@ -165,6 +169,7 @@
 								<td th:text="${p.rate}" />
 								<td th:text="${p.smoking}" />
 								<td th:text="${p.cancer}" />
+								<td th:text="${p.score}" />
 							</tr>
 						  </tbody>
 						</table>

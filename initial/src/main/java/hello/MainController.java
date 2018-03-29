@@ -35,7 +35,7 @@ public class MainController {
     public String home(Model model) {
     	List<Patient> patients = new ArrayList<>();
 	    patientRepository.findAll().forEach(patients::add);
-	    model.addAttribute("patients", patients);
+	    // model.addAttribute("patients", patients);
 	    model.addAttribute("total", patients.size());
 
 	    int better = getBetterPatients();
