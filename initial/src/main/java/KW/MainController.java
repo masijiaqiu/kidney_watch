@@ -297,7 +297,6 @@ public class MainController {
 	    return labTests;
 	}
 
-<<<<<<< HEAD
 	@GetMapping(path="/add") 
 	public @ResponseBody String addNewPatient (@RequestParam String name
 			, @RequestParam String gender, @RequestParam String dob
@@ -328,36 +327,6 @@ public class MainController {
 		patientRepository.save(n);
 		return "Saved";
 	}
-=======
-	// @GetMapping(path="/add") 
-	// public @ResponseBody String addNewPatient (@RequestParam String name
-	// 		, @RequestParam String gender, @RequestParam String dob
-	// 		, @RequestParam Double egfr, @RequestParam Integer date
-	// 		, @RequestParam Double rate, @RequestParam String category
-	// 		, @RequestParam String smoking, @RequestParam String cancer) {
-
-	// 	Patient n = new Patient();
-	// 	n.setName(name);
-	// 	n.setGender(gender);
-	// 	n.setDob(dob);
-	// 	n.setEgfr(egfr);
-
-	// 	Date testDate = new Date();
-	// 	try {
-	// 		testDate = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(date));
-	// 	} catch (Exception e) {
-
-	// 	}
-
-	// 	n.setCategory(category);
-	// 	n.setTestDate(new SimpleDateFormat("yyyy-MM-dd").format(testDate));
-	// 	n.setRate(rate);
-	// 	n.setSmoking(smoking);
-	// 	n.setCancer(cancer);
-	// 	patientRepository.save(n);
-	// 	return "Saved";
-	// }
->>>>>>> 6a826da94d56b9fd79772c3b858cd2c751dfdada
 
 	// @GetMapping(path="/lab")
 	// public @ResponseBody String addNewLabTest (@RequestParam Long pid

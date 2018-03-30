@@ -45,7 +45,7 @@
 			if((pid == ""|| pid == null) && (firstName == "" || firstName == null) && (lastName == "" || lastName == null)){
 				alert("Please input the patient ID or name");
 			}
-			alert(pid);
+			
 			window.location.href = "/individual?pid=" + pid + "&sdate=" + sdate + "&edate=" + edate 
 				+ "&firstName" + firstName + "&lastName" + lastName;
 		}
