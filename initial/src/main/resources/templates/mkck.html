@@ -52,10 +52,6 @@
 
 	<script type="text/javascript">
 
-		function handleClick(num) {
-			window.location.href = "/work?num=" + num;
-		}
-
 		function displayPatients(category, trend) {
 			window.location.href = "/focus?category=" + category + "&trend=" + trend; 
 		}
@@ -135,18 +131,18 @@
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
 					<div name="mkck intro diagram" class="row">
 						<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-							<img src="images/work_1.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(1)">
+							<img src="images/work_1.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
 							<h3 class="fh5co-work-title">Population Trend</h3>
 							<p>Brief Description</p>
 						</div>
 						<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-							<img src="images/work_2.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(2)">
+							<img src="images/work_2.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
 							<h3 class="fh5co-work-title">Age Distribution</h3>
 							<p>Brief Description</p>
 						</div>
 						<div class="clearfix visible-sm-block"></div>
 						<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-							<img src="images/work_3.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(3)">
+							<img src="images/work_3.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
 							<h3 class="fh5co-work-title">Gender Distribution</h3>
 							<p>Brief Description</p>
 						</div>
@@ -169,6 +165,9 @@
 								<th>+/- eGFR/mon</th>
 								<th>Smoking</th>
 								<th>Cancer</th>
+								<th>HTN</th>
+								<th>Diabetes</th>
+								<th>Depression</th>
 								<th>Score</th>
 							</tr>
 						  </thead>
@@ -183,6 +182,9 @@
 								<td th:text="${p.changeRate}" />
 								<td th:text="${p.smoking}" />
 								<td th:text="${p.cancer}" />
+								<td th:text="${p.htn}" />
+								<td th:text="${p.diabetes}" />
+								<td th:text="${p.depression}" />
 								<td th:text="${p.score}" />
 							</tr>
 						  </tbody>

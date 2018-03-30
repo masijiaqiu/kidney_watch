@@ -52,10 +52,6 @@
 
 	<script type="text/javascript">
 
-		function handleClick(num) {
-			window.location.href = "/work?num=" + num;
-		}
-
 		function displayPatients(category, trend) {
 			window.location.href = "/focus?category=" + category + "&trend=" + trend; 
 		}
@@ -104,7 +100,7 @@
 			<h1 id="fh5co-logo"><a href="/home"><img src="images/logo.png" alt="KidneyWatch"></a></h1>
 			<nav id="fh5co-main-menu" role="navigation">
 				<ul>
-					<li class="fh5co-active"><a href="/home">Home</a></li>
+					<li><a href="/home">Home</a></li>
 					<br>
 					<li><a href="/search">Search</a></li>
 					<li class="fh5co-active"><a href="/mkck">MKCK</a></li>
@@ -135,18 +131,18 @@
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
 					<div name="mkck intro diagram" class="row">
 						<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-							<img src="images/work_1.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(1)">
+							<img src="images/work_1.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
 							<h3 class="fh5co-work-title">Population Trend</h3>
 							<p>Brief Description</p>
 						</div>
 						<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-							<img src="images/work_2.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(2)">
+							<img src="images/work_2.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
 							<h3 class="fh5co-work-title">Age Distribution</h3>
 							<p>Brief Description</p>
 						</div>
 						<div class="clearfix visible-sm-block"></div>
 						<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-							<img src="images/work_3.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(3)">
+							<img src="images/work_3.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
 							<h3 class="fh5co-work-title">Gender Distribution</h3>
 							<p>Brief Description</p>
 						</div>
@@ -162,27 +158,33 @@
 							<tr>
 								<th>Patient ID</th>
 								<th>Name</th>
-								<th>Age</th>
+								<th>D.O.B</th>
 								<th>Gender</th>
 								<th>Date</th>
 								<th>eGFR</th>
 								<th>+/- eGFR/mon</th>
-								<th>Smoker</th>
+								<th>Smoking</th>
 								<th>Cancer</th>
+								<th>HTN</th>
+								<th>Diabetes</th>
+								<th>Depression</th>
 								<th>Score</th>
 							</tr>
 						  </thead>
 						  <tbody>
 							<tr th:each="p:${patients}">
-								<td th:text="${p.id}" />
-								<td th:text="${p.name}" />
-								<td th:text="${p.age}" />
+								<td th:text="${p.pid}" />
+								<td th:text="${p.firstName} + ' ' + ${p.lastName}" />
+								<td th:text="${p.dob}" />
 								<td th:text="${p.gender}" />
 								<td th:text="${p.testDate}" />
 								<td th:text="${p.egfr}" />
-								<td th:text="${p.rate}" />
+								<td th:text="${p.changeRate}" />
 								<td th:text="${p.smoking}" />
 								<td th:text="${p.cancer}" />
+								<td th:text="${p.htn}" />
+								<td th:text="${p.diabetes}" />
+								<td th:text="${p.depression}" />
 								<td th:text="${p.score}" />
 							</tr>
 						  </tbody>

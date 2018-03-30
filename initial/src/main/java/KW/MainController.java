@@ -111,11 +111,6 @@ public class MainController {
         return "ahd";
     }
 
-    @GetMapping("/work")
-    public String work(Model model) {
-        return "work";
-    }
-
 	@GetMapping("/patients")
     public @ResponseBody Iterable<Patient> getAllPatients() {
 		return patientRepository.findAll();
