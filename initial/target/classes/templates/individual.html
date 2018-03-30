@@ -33,6 +33,34 @@
 	<!--[if lt IE 9]>
 	<script th:src="@{/js/respond.min.js}"></script>
 	<![endif]-->
+		<!-- jQuery -->
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<!-- jQuery Easing -->
+	<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+	<!-- Bootstrap -->
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<!-- Carousel -->
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<!-- Stellar -->
+	<script th:src="@{/js/jquery.stellar.min.js}"></script>
+	<!-- Waypoints -->
+	<script th:src="@{/js/jquery.waypoints.min.js}"></script>
+	<!-- Counters -->
+	<script th:src="@{/js/jquery.countTo.js}"></script>
+	<!-- MAIN JS -->
+	<script th:src="@{/js/main.js}"></script>
+
+
+	<script th:src="@{/chart/Chart.bundle.js}"></script>
+	<script th:src="@{/chart/utils.js}"></script>
+
+	<style>
+		canvas{
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
 
 	<script type="text/javascript">
 
@@ -77,6 +105,183 @@
 		window.onload = function () {makeAllSortable();};
 
 	</script>
+
+	<!-- Line chart -->
+	<script>
+		var MONTHS1 = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		var configLine1 = {
+			type: 'line',
+			data: {
+				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+				datasets: [{
+					label: 'My First dataset',
+					backgroundColor: window.chartColors.red,
+					borderColor: window.chartColors.red,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+					fill: false,
+				}]
+			},
+			options: {
+				responsive: true,
+				title: {
+					display: true,
+					text: 'eGFR Results Trend'
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Time'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Value'
+						}
+					}]
+				}
+			}
+		};
+
+		var MONTHS2 = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		var configLine2 = {
+			type: 'line',
+			data: {
+				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+				datasets: [{
+					label: 'My First dataset',
+					backgroundColor: window.chartColors.red,
+					borderColor: window.chartColors.red,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+					fill: false,
+				}]
+			},
+			options: {
+				responsive: true,
+				title: {
+					display: true,
+					text: 'Lab Tests Results'
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Time'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Value'
+						}
+					}]
+				}
+			}
+		};
+
+		var configPie1 = {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [1,1,1,1],
+					backgroundColor: [
+						window.chartColors.orange,
+						window.chartColors.grey,
+						window.chartColors.grey,
+						window.chartColors.blue,
+					],
+					label: 'Medicine'
+				}],
+				labels: [
+					'Asprin',
+					'Amitriptyline',
+					'Metformin',
+					'Furosemide'
+				]
+			},
+			options: {
+				responsive: true
+			}
+		};
+
+		var configPie2 = {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [1,1,1,1,1],
+					backgroundColor: [
+						window.chartColors.blue,
+						window.chartColors.grey,
+						window.chartColors.yellow,
+						window.chartColors.green,
+						window.chartColors.grey,
+					],
+					label: 'Comorbidity'
+				}],
+				labels: [
+					'Smoker',
+					'Cancer',
+					'HTN',
+					'Diabetes',
+					'Depression',
+				]
+			},
+			options: {
+				responsive: true
+			}
+		};
+
+		window.onload = function() {
+			var ctxLine1 = document.getElementById('canvas-line').getContext('2d');
+			window.myLine1 = new Chart(ctxLine1, configLine1);
+			var ctxLine2 = document.getElementById('canvas-line2').getContext('2d');
+			window.myLine2 = new Chart(ctxLine2, configLine2);
+			var ctxPie1 = document.getElementById('canvas-pie1').getContext('2d');
+			window.myPie1 = new Chart(ctxPie1, configPie1);
+			var ctxPie2 = document.getElementById('canvas-pie2').getContext('2d');
+			window.myPie2 = new Chart(ctxPie2, configPie2);
+		};
+	</script>
+
+	<!--Pie chart-->
+
 
 	</head>
 	<body>
@@ -123,6 +328,22 @@
 	    				<input type="submit" >
 	  				</div>
 	  				</form>
+
+	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
+	  					<canvas id="canvas-line"></canvas>
+	  				</div>
+
+	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
+	  					<canvas id="canvas-line2"></canvas>
+	  				</div>
+
+					<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
+	  					<canvas id="canvas-pie1"></canvas>
+	  				</div>
+
+	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
+	  					<canvas id="canvas-pie2"></canvas>
+	  				</div>
 
 	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
 						<table class="pop-table" border="0">
@@ -184,24 +405,6 @@
 		</div>
 	</div>
 
-	<!-- jQuery -->
-	<script th:src="@{/js/jquery.min.js}"></script>
-	<!-- jQuery Easing -->
-	<script th:src="@{/js/jquery.easing.1.3.js}"></script>
-	<!-- Bootstrap -->
-	<script th:src="@{/js/bootstrap.min.js}"></script>
-	<!-- Carousel -->
-	<script th:src="@{/js/owl.carousel.min.js}"></script>
-	<!-- Stellar -->
-	<script th:src="@{/js/jquery.stellar.min.js}"></script>
-	<!-- Waypoints -->
-	<script th:src="@{/js/jquery.waypoints.min.js}"></script>
-	<!-- Counters -->
-	<script th:src="@{/js/jquery.countTo.js}"></script>
-	
-	
-	<!-- MAIN JS -->
-	<script th:src="@{/js/main.js}"></script>
 
 	</body>
 </html>
