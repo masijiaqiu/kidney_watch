@@ -108,27 +108,33 @@
 							<tr>
 								<th>Patient ID</th>
 								<th>Name</th>
-								<th>Age</th>
+								<th>D.O.B</th>
 								<th>Gender</th>
 								<th>Date</th>
 								<th>eGFR</th>
 								<th>+/- eGFR/mon</th>
-								<th>Smoker</th>
+								<th>Smoking</th>
 								<th>Cancer</th>
+								<th>HTN</th>
+								<th>Diabetes</th>
+								<th>Depression</th>
 								<th>Score</th>
 							</tr>
 						  </thead>
 						  <tbody>
 							<tr th:each="p:${patients}">
-								<td th:text="${p.id}" />
-								<td th:text="${p.name}" />
-								<td th:text="${p.age}" />
+								<td th:text="${p.pid}" />
+								<td th:text="${p.firstName} + ' ' + ${p.lastName}" />
+								<td th:text="${p.dob}" />
 								<td th:text="${p.gender}" />
 								<td th:text="${p.testDate}" />
 								<td th:text="${p.egfr}" />
-								<td th:text="${p.rate}" />
+								<td th:text="${p.changeRate}" />
 								<td th:text="${p.smoking}" />
 								<td th:text="${p.cancer}" />
+								<td th:text="${p.htn}" />
+								<td th:text="${p.diabetes}" />
+								<td th:text="${p.depression}" />
 								<td th:text="${p.score}" />
 							</tr>
 						  </tbody>

@@ -297,34 +297,36 @@ public class MainController {
 	    return labTests;
 	}
 
-	// @GetMapping(path="/add") 
-	// public @ResponseBody String addNewPatient (@RequestParam String name
-	// 		, @RequestParam String gender, @RequestParam Integer age
-	// 		, @RequestParam Double egfr, @RequestParam Integer date
-	// 		, @RequestParam Double rate, @RequestParam String category
-	// 		, @RequestParam String smoking, @RequestParam String cancer) {
+	@GetMapping(path="/add") 
+	public @ResponseBody String addNewPatient (@RequestParam String name
+			, @RequestParam String gender, @RequestParam String dob
+			, @RequestParam Double egfr, @RequestParam Integer date
+			, @RequestParam Double rate, @RequestParam String category
+			, @RequestParam String smoking, @RequestParam String cancer
+			, @RequestParam String pid) {
 
-	// 	Patient n = new Patient();
-	// 	n.setName(name);
-	// 	n.setGender(gender);
-	// 	n.setAge(age);
-	// 	n.setEgfr(egfr);
+		Patient n = new Patient();
+		n.setPid(pid);
+		n.setFirstName(name);
+		n.setGender(gender);
+		n.setDob(dob);
+		n.setEgfr(egfr);
 
-	// 	Date testDate = new Date();
-	// 	try {
-	// 		testDate = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(date));
-	// 	} catch (Exception e) {
+		Date testDate = new Date();
+		try {
+			testDate = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(date));
+		} catch (Exception e) {
 
-	// 	}
+		}
 
-	// 	n.setCategory(category);
-	// 	n.setTestDate(new SimpleDateFormat("yyyy-MM-dd").format(testDate));
-	// 	n.setRate(rate);
-	// 	n.setSmoking(smoking);
-	// 	n.setCancer(cancer);
-	// 	patientRepository.save(n);
-	// 	return "Saved";
-	// }
+		n.setCategory(category);
+		n.setTestDate(new SimpleDateFormat("yyyy-MM-dd").format(testDate));
+		n.setChangeRate(rate);
+		n.setSmoking(smoking);
+		n.setCancer(cancer);
+		patientRepository.save(n);
+		return "Saved";
+	}
 
 	// @GetMapping(path="/lab")
 	// public @ResponseBody String addNewLabTest (@RequestParam Long pid
