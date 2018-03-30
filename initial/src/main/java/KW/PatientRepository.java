@@ -1,8 +1,8 @@
-package hello;
+package KW;
 
 import org.springframework.data.repository.CrudRepository;
 
-import hello.Patient;
+import KW.Patient;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
