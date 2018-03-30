@@ -50,10 +50,10 @@ public class MainController {
     }
 
     @GetMapping("/individual")
-    public String individual(Model model, @RequestParam Long pid
+    public String individual(Model model, @RequestParam String pid
     	, @RequestParam String sdate, @RequestParam String edate) {
     	try{
-	    	Patient p = patientRepository.findById(pid).get();
+	    	Patient p = findByPid(pid);
 	    	model.addAttribute("patient", p);
 
 	    	Date start = new Date();
@@ -126,10 +126,25 @@ public class MainController {
 		return labTestRepository.findAll();
 	}
 
+	public Patient findByPid(String pid) {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+    	Patient re = new Patient();
+    	for(Patient p: iterator) {
+    		if (p.getPid().equals(pid)) {
+    			re = p;
+    			break;
+    		}
+    	}
+
+    	return re;
+	}
+
 	public List<Patient> getCategoryPatients(String category) {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
-	    for(Patient p: iterator) {
+
+    	for(Patient p: iterator) {
 	    	if (p.getCategory().equals(category)) {
 	    		patients.add(p);
 	    	}
@@ -141,7 +156,7 @@ public class MainController {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
-	    	if (p.getRate() > 0 ) {
+	    	if (p.getChangeRate() > 0 ) {
 	    		patients.add(p);
 	    	}
 	    }
@@ -152,7 +167,7 @@ public class MainController {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
-	    	if (p.getRate() < 0 ) {
+	    	if (p.getChangeRate() < 0 ) {
 	    		patients.add(p);
 	    	}
 	    }
@@ -163,7 +178,7 @@ public class MainController {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
-	    	if (p.getCategory().equals(category) && p.getRate() > 0 ) {
+	    	if (p.getCategory().equals(category) && p.getChangeRate() > 0 ) {
 	    		patients.add(p);
 	    	}
 	    }
@@ -174,7 +189,7 @@ public class MainController {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
-	    	if (p.getCategory().equals(category) && p.getRate() < 0 ) {
+	    	if (p.getCategory().equals(category) && p.getChangeRate() < 0 ) {
 	    		patients.add(p);
 	    	}
 	    }
@@ -203,66 +218,72 @@ public class MainController {
 	    return patients.size();
 	}
 
-	public List<LabTest> getLabTestsByPidWithDate(Long id, Date sdate, Date edate) {
+	public List<LabTest> getLabTestsByPidWithDate(String pid, Date sdate, Date edate) {
 		List<LabTest> labTests = new ArrayList<>();
     	Iterable<LabTest> iterator = labTestRepository.findAll();
 	    for(LabTest e: iterator) {
-	    	if (e.getPid() == id && e.getTestDate().after(sdate) && e.getTestDate().before(edate)) {
+	    	Date testDate = new Date();
+	    	try {
+		    	testDate = new SimpleDateFormat("yyyy-MM-dd").parse(e.getTestDate());
+		    } catch (Exception exp) {
+
+			}
+	    	if (e.getPid().equals(pid) && testDate.after(sdate) && testDate.before(edate)) {
 	    		labTests.add(e);
 	    	}
 	    }
 	    return labTests;
 	}
 
-	@GetMapping(path="/add") 
-	public @ResponseBody String addNewPatient (@RequestParam String name
-			, @RequestParam String gender, @RequestParam Integer age
-			, @RequestParam Double egfr, @RequestParam Integer date
-			, @RequestParam Double rate, @RequestParam String category
-			, @RequestParam String smoking, @RequestParam String cancer) {
+	// @GetMapping(path="/add") 
+	// public @ResponseBody String addNewPatient (@RequestParam String name
+	// 		, @RequestParam String gender, @RequestParam Integer age
+	// 		, @RequestParam Double egfr, @RequestParam Integer date
+	// 		, @RequestParam Double rate, @RequestParam String category
+	// 		, @RequestParam String smoking, @RequestParam String cancer) {
 
-		Patient n = new Patient();
-		n.setName(name);
-		n.setGender(gender);
-		n.setAge(age);
-		n.setEgfr(egfr);
+	// 	Patient n = new Patient();
+	// 	n.setName(name);
+	// 	n.setGender(gender);
+	// 	n.setAge(age);
+	// 	n.setEgfr(egfr);
 
-		Date testDate = new Date();
-		try {
-			testDate = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(date));
-		} catch (Exception e) {
+	// 	Date testDate = new Date();
+	// 	try {
+	// 		testDate = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(date));
+	// 	} catch (Exception e) {
 
-		}
+	// 	}
 
-		n.setCategory(category);
-		n.setTestDate(new SimpleDateFormat("yyyy-MM-dd").format(testDate));
-		n.setRate(rate);
-		n.setSmoking(smoking);
-		n.setCancer(cancer);
-		patientRepository.save(n);
-		return "Saved";
-	}
+	// 	n.setCategory(category);
+	// 	n.setTestDate(new SimpleDateFormat("yyyy-MM-dd").format(testDate));
+	// 	n.setRate(rate);
+	// 	n.setSmoking(smoking);
+	// 	n.setCancer(cancer);
+	// 	patientRepository.save(n);
+	// 	return "Saved";
+	// }
 
-	@GetMapping(path="/lab")
-	public @ResponseBody String addNewLabTest (@RequestParam Long pid
-			, @RequestParam String labName, @RequestParam String labUnit
-			, @RequestParam Double labValue, @RequestParam Integer date) {
+	// @GetMapping(path="/lab")
+	// public @ResponseBody String addNewLabTest (@RequestParam Long pid
+	// 		, @RequestParam String labName, @RequestParam String labUnit
+	// 		, @RequestParam Double labValue, @RequestParam Integer date) {
 
-		LabTest n = new LabTest();
-		n.setPid(pid);
-		n.setLabValue(labValue);
-		n.setLabName(labName);
-		n.setLabUnit(labUnit);
+	// 	LabTest n = new LabTest();
+	// 	n.setPid(pid);
+	// 	n.setLabValue(labValue);
+	// 	n.setLabName(labName);
+	// 	n.setLabUnit(labUnit);
 
-		Date testDate = new Date();
-		try {
-			testDate = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(date));
-		} catch (Exception e) {
+	// 	Date testDate = new Date();
+	// 	try {
+	// 		testDate = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(date));
+	// 	} catch (Exception e) {
 
-		}
-		n.setTestDate(testDate);
-		labTestRepository.save(n);
-		return "Saved";
-	}
-	
+	// 	}
+	// 	n.setTestDate(testDate);
+	// 	labTestRepository.save(n);
+	// 	return "Saved";
+	// }
+
 }
