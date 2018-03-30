@@ -299,7 +299,7 @@ public class MainController {
 
 	// @GetMapping(path="/add") 
 	// public @ResponseBody String addNewPatient (@RequestParam String name
-	// 		, @RequestParam String gender, @RequestParam Integer age
+	// 		, @RequestParam String gender, @RequestParam String dob
 	// 		, @RequestParam Double egfr, @RequestParam Integer date
 	// 		, @RequestParam Double rate, @RequestParam String category
 	// 		, @RequestParam String smoking, @RequestParam String cancer) {
@@ -307,7 +307,7 @@ public class MainController {
 	// 	Patient n = new Patient();
 	// 	n.setName(name);
 	// 	n.setGender(gender);
-	// 	n.setAge(age);
+	// 	n.setDob(dob);
 	// 	n.setEgfr(egfr);
 
 	// 	Date testDate = new Date();

@@ -40,7 +40,10 @@
 			var pid = document.getElementById("patientid").value;
 			var sdate = document.getElementById("sdate").value;
 			var edate = document.getElementById("edate").value;
-			window.location.href = "/individual?pid=" + pid + "&sdate=" + sdate + "&edate=" + edate;
+			var firstName = document.getElementById("firstname").value;
+			var lastName = document.getElementById("lastname").value;
+			window.location.href = "/individual?pid=" + pid + "&sdate=" + sdate + "&edate=" + edate 
+				+ "&firstName" + firstName + "&lastName" + lastName;
 		}
 
 	</script>
@@ -89,12 +92,12 @@
 					</div>
 	  				<div>
 		    			<label for="party">Starting Date:</label>
-		    			<input type="date" id="sdate" name="sdate" min="2015-04-01" max="2017-03-20" required>
+		    			<input type="date" id="sdate" name="sdate" min="2015-04-01" max="2017-03-20">
 		    			<span class="validity"></span>
 	  				</div>
 	  				<div>
 		    			<label for="party">Ending Date:</label>
-		    			<input type="date" id="edate" name="edate" min="2015-04-01" max="2017-03-20" required>
+		    			<input type="date" id="edate" name="edate" min="2015-04-01" max="2017-03-20">
 		    			<span class="validity"></span>
 	  				</div>
 	  				<div>
