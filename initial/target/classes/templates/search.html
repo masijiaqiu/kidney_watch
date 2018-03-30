@@ -55,9 +55,9 @@
 			<h1 id="fh5co-logo"><a href="/home"><img src="images/logo.png" alt="KidneyWatch"></a></h1>
 			<nav id="fh5co-main-menu" role="navigation">
 				<ul>
-					<li class="fh5co-active"><a href="/home">Home</a></li>
+					<li><a href="/home">Home</a></li>
 					<br>
-					<li><a href="/search">Search</a></li>
+					<li class="fh5co-active"><a href="/search">Search</a></li>
 					<li><a href="/mkck">MKCK</a></li>
 					<li><a href="/pd">PD</a></li>
 					<li><a href="/hd">HD</a></li>
@@ -77,14 +77,24 @@
 		    			<input type="text" id="patientid" name="patientid">
 		    			<span class="validity"></span>
 					</div>
+					<div>
+						<label for="party">First Name:</label>
+		    			<input type="text" id="firstname" name="firstname">
+		    			<span class="validity"></span>
+					</div>
+					<div>
+						<label for="party">Last Name:</label>
+		    			<input type="text" id="lastname" name="lastname">
+		    			<span class="validity"></span>
+					</div>
 	  				<div>
 		    			<label for="party">Starting Date:</label>
-		    			<input type="date" id="sdate" name="party" min="2015-04-01" max="2017-03-20" required>
+		    			<input type="date" id="sdate" name="sdate" min="2015-04-01" max="2017-03-20" required>
 		    			<span class="validity"></span>
 	  				</div>
 	  				<div>
 		    			<label for="party">Ending Date:</label>
-		    			<input type="date" id="edate" name="party" min="2015-04-01" max="2017-03-20" required>
+		    			<input type="date" id="edate" name="edate" min="2015-04-01" max="2017-03-20" required>
 		    			<span class="validity"></span>
 	  				</div>
 	  				<div>
