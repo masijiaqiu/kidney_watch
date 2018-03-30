@@ -32,8 +32,8 @@ public class MainController {
 	    patientRepository.findAll().forEach(patients::add);
 	    model.addAttribute("total", patients.size());
 
-	    int better = getBetterPatients();
-	    int worse = getWorsePatients();
+	    int better = countBetterPatients();
+	    int worse = countWorsePatients();
 	    model.addAttribute("better", better);
 	    model.addAttribute("worse", worse);
 	    int male = countPatientsByGender("M");
@@ -82,8 +82,8 @@ public class MainController {
     	List<Patient> patients = getCategoryPatients("MKCK");
 	    model.addAttribute("patients", patients);
 	    model.addAttribute("total", patients.size());
-	    int better = getBetterPatientsByCategory("MKCK");
-	    int worse = getWorsePatientsByCategory("MKCK");
+	    int better = countBetterPatientsByCategory("MKCK");
+	    int worse = countWorsePatientsByCategory("MKCK");
 	    model.addAttribute("better", better);
 	    model.addAttribute("worse", worse);
 	    int male = countPatientsByGenderWithCategory("MKCK", "M");
@@ -126,6 +126,29 @@ public class MainController {
 		return labTestRepository.findAll();
 	}
 
+	@GetMapping("/focus")
+	public String focus(Model model, @RequestParam String category
+		, @RequestParam String trend) {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+
+    	if (category.equals("all")) {
+    		if (trend.equals("better")) {
+    			model.addAttribute("patients", getBetterPatients());
+    		} else {
+    			model.addAttribute("patients", getWorsePatients());
+    		}
+    	} else {
+    		if (trend.equals("better")) {
+    			model.addAttribute("patients", getBetterPatientsByCategory(category));
+    		} else {
+    			model.addAttribute("patients", getWorsePatientsByCategory(category));
+    		}
+    	}
+
+    	return "focus";
+	}
+
 	public Patient findByPid(String pid) {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
@@ -152,7 +175,7 @@ public class MainController {
 	    return patients;
 	}
 
-	public int getBetterPatients() {
+	public int countBetterPatients() {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
@@ -163,7 +186,7 @@ public class MainController {
 	    return patients.size();
 	}
 
-	public int getWorsePatients() {
+	public int countWorsePatients() {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
@@ -174,7 +197,51 @@ public class MainController {
 	    return patients.size();
 	}
 
-	public int getBetterPatientsByCategory(String category) {
+	public List<Patient> getBetterPatients() {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getChangeRate() > 0 ) {
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients;
+	}
+
+	public List<Patient> getWorsePatients() {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getChangeRate() < 0 ) {
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients;
+	}
+
+	public List<Patient> getBetterPatientsByCategory(String category) {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getCategory().equals(category) && p.getChangeRate() > 0 ) {
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients;
+	}
+
+	public List<Patient> getWorsePatientsByCategory(String category) {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getCategory().equals(category) && p.getChangeRate() < 0 ) {
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients;
+	}
+
+	public int countBetterPatientsByCategory(String category) {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
@@ -185,7 +252,7 @@ public class MainController {
 	    return patients.size();
 	}
 
-	public int getWorsePatientsByCategory(String category) {
+	public int countWorsePatientsByCategory(String category) {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {

@@ -37,14 +37,6 @@
 
 	<script type="text/javascript">
 
-		function handleClick(num) {
-			window.location.href = "/work?num=" + num;
-		}
-
-		function displayPatients(category, trend) {
-			window.location.href = "/focus?category=" + category + "&trend=" + trend; 
-		}
-
 		function sortTable(table, col, reverse) {
 		    var tb = table.tBodies[0], // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
 		        tr = Array.prototype.slice.call(tb.rows, 0), // put rows into array
@@ -104,38 +96,7 @@
 
 			<div class="fh5co-narrow-content">
 				<div class="row">
-					<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">MKCK (pre-dialysis patients)</h2>
-				</div>
-
-				<div class="row animate-box" data-animate-effect="fadeInLeft">
-					<div name="mkck intro" class="row">
-						<li th:text="${total} + ' patients in total (Male: ' + ${male} + '; Female: ' + ${female} + ')'"/>
-						<li th:text="${better} + ' patients are getting better'" onclick="displayPatients('mkck', 'better')"/>
-						<li th:text="${worse} + ' patients are getting worse'" onclick="displayPatients('mkck', 'worse')"/>
-					</div>
-				</div>
-			</div>
-
-			<div class="fh5co-narrow-content fh5co-border-bottom">
-				<div class="row animate-box" data-animate-effect="fadeInLeft">
-					<div name="mkck intro diagram" class="row">
-						<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-							<img src="images/work_1.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(1)">
-							<h3 class="fh5co-work-title">Population Trend</h3>
-							<p>Brief Description</p>
-						</div>
-						<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-							<img src="images/work_2.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(2)">
-							<h3 class="fh5co-work-title">Age Distribution</h3>
-							<p>Brief Description</p>
-						</div>
-						<div class="clearfix visible-sm-block"></div>
-						<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-							<img src="images/work_3.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" onclick="handleClick(3)">
-							<h3 class="fh5co-work-title">Gender Distribution</h3>
-							<p>Brief Description</p>
-						</div>
-					</div>
+					<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Welcome to KidneyWatch</h2>
 				</div>
 			</div>
 
@@ -147,25 +108,25 @@
 							<tr>
 								<th>Patient ID</th>
 								<th>Name</th>
-								<th>D.O.B</th>
+								<th>Age</th>
 								<th>Gender</th>
 								<th>Date</th>
 								<th>eGFR</th>
 								<th>+/- eGFR/mon</th>
-								<th>Smoking</th>
+								<th>Smoker</th>
 								<th>Cancer</th>
 								<th>Score</th>
 							</tr>
 						  </thead>
 						  <tbody>
 							<tr th:each="p:${patients}">
-								<td th:text="${p.pid}" />
-								<td th:text="${p.firstName} + ' ' + ${p.lastName}" />
-								<td th:text="${p.dob}" />
+								<td th:text="${p.id}" />
+								<td th:text="${p.name}" />
+								<td th:text="${p.age}" />
 								<td th:text="${p.gender}" />
 								<td th:text="${p.testDate}" />
 								<td th:text="${p.egfr}" />
-								<td th:text="${p.changeRate}" />
+								<td th:text="${p.rate}" />
 								<td th:text="${p.smoking}" />
 								<td th:text="${p.cancer}" />
 								<td th:text="${p.score}" />
