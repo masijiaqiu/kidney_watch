@@ -1,8 +1,2 @@
-hello/MainController.class
-hello/PatientRepository.class
-hello/Application.class
-hello/LabTest.class
-hello/Patient.class
-hello/ACRRepository.class
-hello/ACR.class
-hello/LabTestRepository.class
+KW/PatientRepository.class
+KW/Patient.class
