@@ -236,15 +236,25 @@ figure {
     width: 100%;
   }
 }
+#fh5co-main .column_2 {
+    float: left;
+    width: 50%;
+}
 #fh5co-main .fh5co-narrow-content {
   position: relative;
-  width: 90%;
+  width: 75%;
   margin: 0 auto;
   padding: 4em 0;
 }
 #fh5co-main .fh5co-narrow-chart {
   position: relative;
   width: 70%;
+  margin: 0 auto;
+  padding: 4em 0;
+}
+#fh5co-main .fh5co-narrow-table {
+  position: relative;
+  width: 93%;
   margin: 0 auto;
   padding: 4em 0;
 }
