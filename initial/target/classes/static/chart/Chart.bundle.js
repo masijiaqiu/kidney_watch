@@ -7205,7 +7205,6 @@ defaults._set('doughnut', {
 			label: function(tooltipItem, data) {
 				var dataLabel = data.labels[tooltipItem.index];
 				// var value = ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-				// var value = '';
 
 				// if (helpers.isArray(dataLabel)) {
 				// 	// show value on first line of multiline label

@@ -177,26 +177,18 @@
 				}
 			}
 		};
-		configLine1.data.labels = /*[[${dateLabels}]]*/;
-		configLine1.data.datasets[0].data =  /*[[${labValues}]]*/ ;
+		configLine1.data.labels = /*[[${egfrDateLabels}]]*/;
+		configLine1.data.datasets[0].data =  /*[[${egfrValues}]]*/ ;
 
 		var configLine2 = {
 			type: 'line',
 			data: {
-				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+				labels: [],
 				datasets: [{
-					label: 'My First dataset',
-					backgroundColor: window.chartColors.red,
-					borderColor: window.chartColors.red,
-					data: [
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor()
-					],
+					label: 'ACR Values',
+					backgroundColor: window.chartColors.orange,
+					borderColor: window.chartColors.orange,
+					data: [],
 					fill: false,
 				}]
 			},
@@ -204,7 +196,7 @@
 				responsive: true,
 				title: {
 					display: true,
-					text: 'Lab Tests Results'
+					text: 'ACR Results Trend'
 				},
 				tooltips: {
 					mode: 'index',
@@ -232,6 +224,8 @@
 				}
 			}
 		};
+		configLine2.data.labels = /*[[${acrDateLabels}]]*/;
+		configLine2.data.datasets[0].data =  /*[[${acrValues}]]*/ ;
 
 		var configPie1 = {
 			type: 'pie',

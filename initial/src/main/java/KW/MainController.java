@@ -119,15 +119,23 @@ public class MainController {
 			    Collections.sort(labTests);
 			    model.addAttribute("labTests", labTests);
 
-			    List<String> dateLabels = new ArrayList<>();
-			    List<Double> labValues = new ArrayList<>();
+			    List<String> egfrDateLabels = new ArrayList<>();
+			    List<String> acrDateLabels = new ArrayList<>();
+			    List<Double> egfrValues = new ArrayList<>();
+			    List<Double> acrValues = new ArrayList<>();
 			    for (LabTest lt: labTests) {
-			    	dateLabels.add(lt.getTestDate());
-			    	labValues.add(lt.getLabValue());
+			    	if (lt.getLabName().equals("eGFR")) {
+				    	egfrDateLabels.add(lt.getTestDate());
+				    	egfrValues.add(lt.getLabValue());
+				    } else {
+				    	acrDateLabels.add(lt.getTestDate());
+				    	acrValues.add(lt.getLabValue());
+				    }
 			    }
-			    model.addAttribute("dateLabels", dateLabels);
-			    model.addAttribute("labValues", labValues);
-
+			    model.addAttribute("egfrDateLabels", egfrDateLabels);
+			    model.addAttribute("egfrValues", egfrValues);
+			    model.addAttribute("acrDateLabels", acrDateLabels);
+			    model.addAttribute("acrValues", acrValues);
 
 		    	return "individual";
 		    } catch (Exception e) {
