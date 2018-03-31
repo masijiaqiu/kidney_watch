@@ -68,7 +68,30 @@
 			var pid = document.getElementById("patientid").value;
 			var sdate = document.getElementById("sdate").value;
 			var edate = document.getElementById("edate").value;
-			window.location.href = "/individual?pid=" + pid + "&sdate=" + sdate + "&edate=" + edate;
+			var firstName = document.getElementById("firstname").value;
+			var lastName = document.getElementById("lastname").value;
+
+			if((pid == ""|| pid == null) && (firstName == "" || firstName == null) && (lastName == "" || lastName == null)){
+				alert("Please input the patient ID or name");
+			}
+			
+			if (pid == "" || pid == null) {
+				pid = "null";
+			}
+			if (firstName == "" || firstName == null) {
+				firstName = "null";
+			}
+			if (lastName == "" || lastName == null) {
+				lastName = "null";
+			}
+			if (sdate == "" || sdate == null) {
+				sdate = "null";
+			}
+			if (edate == "" || edate == null) {
+				edate = "null";
+			}
+
+			window.location.href = "/individual?pid=" + pid + "&sdate=" + sdate + "&edate=" + edate + "&firstName=" + firstName + "&lastName=" + lastName;
 		}
 
 		function sortTable(table, col, reverse) {
