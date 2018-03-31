@@ -2,6 +2,7 @@
 java -jar target/gs-serving-web-content-0.1.0.jar
 mysql -u root -p
 
+./mvnw spring-boot:run
 
 create database db_health;
 create user 'health' identified by '792';
@@ -13,13 +14,13 @@ curl 'localhost:8080/add?pid=100A&name=Jane&gender=F&dob=1980-01-01&egfr=20&date
 
 curl 'localhost:8080/add?name=Doe&gender=M&age=24&egfr=45&date=20180523&rate=4&cancer=No&smoking=Yes&category=MKCK'
 
-curl 'localhost:8080/lab?pid=100A&labName=eGFR&labValue=20&labUnit=&date=20170323&labUnit="mL/min/1.73 m4"'
-curl 'localhost:8080/lab?pid=100A&labName=eGFR&labValue=23&labUnit=&date=20170320&labUnit="mL/min/1.73 m4"'
-curl 'localhost:8080/lab?pid=100A&labName=eGFR&labValue=24&labUnit=&date=20170318&labUnit="mL/min/1.73 m4"'
+curl 'localhost:8080/lab?pid=100A&labName=eGFR&labValue=20&labUnit=&date=20170323&labUnit=mL%2Fmin%2F1%2E73%20m4'
+curl 'localhost:8080/lab?pid=100A&labName=eGFR&labValue=23&labUnit=&date=20170320&labUnit=mL%2Fmin%2F1%2E73%20m4'
+curl 'localhost:8080/lab?pid=100A&labName=eGFR&labValue=24&labUnit=&date=20170318&labUnit=mL%2Fmin%2F1%2E73%20m4'
 
-curl 'localhost:8080/lab?pid=100A&labName=ACR&labValue=300&labUnit=&date=20170323&labUnit="μg/mg"'
-curl 'localhost:8080/lab?pid=100A&labName=ACR&labValue=403&labUnit=&date=20170320&labUnit="μg/mg"'
-curl 'localhost:8080/lab?pid=100A&labName=ACR&labValue=324&labUnit=&date=20170318&labUnit="μg/mg"'
+curl 'localhost:8080/lab?pid=100A&labName=ACR&labValue=300&labUnit=&date=20170323&labUnit=%B5g%2Fmg'
+curl 'localhost:8080/lab?pid=100A&labName=ACR&labValue=403&labUnit=&date=20170320&labUnit=%B5g%2Fmg'
+curl 'localhost:8080/lab?pid=100A&labName=ACR&labValue=324&labUnit=&date=20170318&labUnit=%B5g%2Fmg'
 
 
 MKCK (pre-dialysis patients) eGFR > 15

@@ -111,7 +111,7 @@
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
 
-			<h1 id="fh5co-logo"><a href="/home"><img src="images/logo.png" alt="KidneyWatch"></a></h1>
+			<h1 id="fh5co-logo"><a href="/home"><img src="images/logo.jpg" alt="KidneyWatch" style="width:100px;height:100px;"></a></h1>
 			<nav id="fh5co-main-menu" role="navigation">
 				<ul>
 					<li><a href="/home">Home</a></li>
@@ -160,47 +160,48 @@
 	    				<input type="submit" >
 	  				</div>
 					</form>
-
-	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
-						<table class="pop-table" border="0">
-						  <thead>
-							<tr>
-								<th>Patient ID</th>
-								<th>Name</th>
-								<th>D.O.B</th>
-								<th>Gender</th>
-								<th>Latest GFR</th>
-								<th>eGFR Change</th>
-								<th>Smoking</th>
-								<th>Cancer</th>
-								<th>HTN</th>
-								<th>Diabetes</th>
-								<th>Depression</th>
-								<th>Category</th>
-								<th>Score</th>
-							</tr>
-						  </thead>
-						  <tbody>
-							<tr th:each="p:${patients}" th:id="${p.pid}" onclick="selectPatient(this.id)">
-								<td th:text="${p.pid}" />
-								<td th:text="${p.firstName} + ' ' + ${p.lastName}" />
-								<td th:text="${p.dob}" />
-								<td th:text="${p.gender}" />
-								<td th:text="${p.egfr}" />
-								<td th:text="${p.changeRate}" />
-								<td th:text="${p.smoking}" />
-								<td th:text="${p.cancer}" />
-								<td th:text="${p.htn}" />
-								<td th:text="${p.diabetes}" />
-								<td th:text="${p.depression}" />
-								<td th:text="${p.category}" />
-								<td th:text="${p.score}" />
-							</tr>
-						  </tbody>
-						</table>
-					</div>
 				</div>
 			</div>
+
+			<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
+				<table class="pop-table" border="0">
+				  <thead>
+					<tr>
+						<th>Patient ID</th>
+						<th>Name</th>
+						<th>D.O.B</th>
+						<th>Gender</th>
+						<th>Latest GFR</th>
+						<th>eGFR Change</th>
+						<th>Smoking</th>
+						<th>Cancer</th>
+						<th>HTN</th>
+						<th>Diabetes</th>
+						<th>Depression</th>
+						<th>Category</th>
+						<th>Score</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<tr th:each="p:${patients}" th:id="${p.pid}" onclick="selectPatient(this.id)">
+						<td th:text="${p.pid}" />
+						<td th:text="${p.firstName} + ' ' + ${p.lastName}" />
+						<td th:text="${p.dob}" />
+						<td th:text="${p.gender}" />
+						<td th:text="${p.egfr}" />
+						<td th:text="${p.changeRate}" />
+						<td th:text="${p.smoking}" />
+						<td th:text="${p.cancer}" />
+						<td th:text="${p.htn}" />
+						<td th:text="${p.diabetes}" />
+						<td th:text="${p.depression}" />
+						<td th:text="${p.category}" />
+						<td th:text="${p.score}" />
+					</tr>
+				  </tbody>
+				</table>
+			</div>
+
 		</div>
 	</div>
 

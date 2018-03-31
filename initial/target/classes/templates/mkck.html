@@ -150,6 +150,19 @@
 		};
 		configPie2.data.datasets[0].data = /*[[${trend}]]*/;
 
+		var barChartData = {
+			labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8'],
+			datasets: [{
+				label: 'Number of Patients',
+				backgroundColor: '#B7D3F2',
+				// borderColor: window.chartColors.red,
+				// borderWidth: 1,
+				data: []
+			}]
+
+		};
+		barChartData.datasets[0].data = /*[[${scoreDis}]]*/;
+
 		window.onload = function() {
 			makeAllSortable();
 
@@ -157,6 +170,32 @@
 			window.myPie1 = new Chart(ctxPie1, configPie1);
 			var ctxPie2 = document.getElementById('canvas-pie2').getContext('2d');
 			window.myPie2 = new Chart(ctxPie2, configPie2);
+
+			var ctx = document.getElementById('canvas-dist').getContext('2d');
+			window.myBar = new Chart(ctx, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					title: {
+						display: true,
+						text: 'Score Distribution of the Population'
+					},
+					tooltips: {
+						mode: 'index',
+						intersect: false
+					},
+					responsive: true,
+					scales: {
+						xAxes: [{
+							// stacked: true,
+							barThickness : 65,
+						}],
+						yAxes: [{
+							// stacked: true
+						}]
+					}
+				}
+			});
 		};
 
 
@@ -169,7 +208,7 @@
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
 
-			<h1 id="fh5co-logo"><a href="/home"><img src="images/logo.png" alt="KidneyWatch"></a></h1>
+			<h1 id="fh5co-logo"><a href="/home"><img src="images/logo.jpg" alt="KidneyWatch" style="width:100px;height:100px;"></a></h1>
 			<nav id="fh5co-main-menu" role="navigation">
 				<ul>
 					<li><a href="/home">Home</a></li>
@@ -208,9 +247,12 @@
 	  				<div name="mkck main table" id="individual-report" class="column_2">
 	  					<canvas id="canvas-pie2"></canvas>
 	  				</div>
-
 				</div>
 			</div>
+
+			<div name="mkck main table" id="individual-report" class="fh5co-narrow-chart fh5co-border-bottom row animate-box" data-animate-effect="fadeInLeft">
+	  			<canvas id="canvas-dist"></canvas>
+	  		</div>
 
 			<div class="fh5co-narrow-content fh5co-border-bottom">
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
@@ -256,8 +298,6 @@
 			</div>
 		</div>
 	</div>
-
-
 
 	</body>
 </html>

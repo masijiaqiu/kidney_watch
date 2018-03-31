@@ -46,6 +46,9 @@ public class MainController {
 	    model.addAttribute("maleCategory", maleCategory);
 	    model.addAttribute("femaleCategory", femaleCategory);
 
+	    int[] scoreDis = getScoreDistribution();
+	    model.addAttribute("scoreDis", scoreDis);
+
         return "home";
     }
 
@@ -135,7 +138,7 @@ public class MainController {
 			    List<Double> egfrValues = new ArrayList<>();
 			    List<Double> acrValues = new ArrayList<>();
 			    for (LabTest lt: labTests) {
-			    	if (lt.getLabName().equals("eGFR")) {
+			    	if (lt.getLabName().equalsIgnoreCase("eGFR")) {
 				    	egfrDateLabels.add(lt.getTestDate());
 				    	egfrValues.add(lt.getLabValue());
 				    } else {
@@ -174,24 +177,78 @@ public class MainController {
 	    model.addAttribute("gender", new int[]{male, female});
 	    model.addAttribute("trend", new int[]{better, worse});
 
+	    int[] scoreDis = getScoreDistributionByCategory("MKCK");
+	    model.addAttribute("scoreDis", scoreDis);
+
         return "mkck";
     }
 
     @GetMapping("/pd")
     public String pd(Model model) {
-	    model.addAttribute("patients", getCategoryPatients("PD"));
+	    List<Patient> patients = getCategoryPatients("PD");
+	    model.addAttribute("patients", patients);
+	    model.addAttribute("total", patients.size());
+	    int better = countBetterPatientsByCategory("PD");
+	    int worse = countWorsePatientsByCategory("PD");
+	    model.addAttribute("better", better);
+	    model.addAttribute("worse", worse);
+	    int male = countPatientsByGenderWithCategory("PD", "M");
+	    int female = countPatientsByGenderWithCategory("PD", "F");
+	    model.addAttribute("male", male);
+	    model.addAttribute("female", female);
+
+	    model.addAttribute("gender", new int[]{male, female});
+	    model.addAttribute("trend", new int[]{better, worse});
+
+	    int[] scoreDis = getScoreDistributionByCategory("PD");
+	    model.addAttribute("scoreDis", scoreDis);
+
         return "pd";
     }
 
     @GetMapping("/hd")
     public String hd(Model model) {
-    	model.addAttribute("patients", getCategoryPatients("HD"));
+    	List<Patient> patients = getCategoryPatients("HD");
+	    model.addAttribute("patients", patients);
+	    model.addAttribute("total", patients.size());
+	    int better = countBetterPatientsByCategory("HD");
+	    int worse = countWorsePatientsByCategory("HD");
+	    model.addAttribute("better", better);
+	    model.addAttribute("worse", worse);
+	    int male = countPatientsByGenderWithCategory("HD", "M");
+	    int female = countPatientsByGenderWithCategory("HD", "F");
+	    model.addAttribute("male", male);
+	    model.addAttribute("female", female);
+
+	    model.addAttribute("gender", new int[]{male, female});
+	    model.addAttribute("trend", new int[]{better, worse});
+
+	    int[] scoreDis = getScoreDistributionByCategory("HD");
+	    model.addAttribute("scoreDis", scoreDis);
+
         return "hd";
     }
 
     @GetMapping("/ahd")
     public String ahd(Model model) {
-    	model.addAttribute("patients", getCategoryPatients("AHD"));
+    	List<Patient> patients = getCategoryPatients("AHD");
+	    model.addAttribute("patients", patients);
+	    model.addAttribute("total", patients.size());
+	    int better = countBetterPatientsByCategory("AHD");
+	    int worse = countWorsePatientsByCategory("AHD");
+	    model.addAttribute("better", better);
+	    model.addAttribute("worse", worse);
+	    int male = countPatientsByGenderWithCategory("AHD", "M");
+	    int female = countPatientsByGenderWithCategory("AHD", "F");
+	    model.addAttribute("male", male);
+	    model.addAttribute("female", female);
+
+	    model.addAttribute("gender", new int[]{male, female});
+	    model.addAttribute("trend", new int[]{better, worse});
+
+	    int[] scoreDis = getScoreDistributionByCategory("AHD");
+	    model.addAttribute("scoreDis", scoreDis);
+
         return "ahd";
     }
 
@@ -211,14 +268,14 @@ public class MainController {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 
-    	if (category.equals("all")) {
-    		if (trend.equals("better")) {
+    	if (category.equalsIgnoreCase("all")) {
+    		if (trend.equalsIgnoreCase("better")) {
     			model.addAttribute("patients", getBetterPatients());
     		} else {
     			model.addAttribute("patients", getWorsePatients());
     		}
     	} else {
-    		if (trend.equals("better")) {
+    		if (trend.equalsIgnoreCase("better")) {
     			model.addAttribute("patients", getBetterPatientsByCategory(category));
     		} else {
     			model.addAttribute("patients", getWorsePatientsByCategory(category));
@@ -233,7 +290,7 @@ public class MainController {
     	Iterable<Patient> iterator = patientRepository.findAll();
     	Patient re = new Patient();
     	for(Patient p: iterator) {
-    		if (p.getPid().equals(pid)) {
+    		if (p.getPid().equalsIgnoreCase(pid)) {
     			re = p;
     			break;
     		}
@@ -283,7 +340,7 @@ public class MainController {
     	Iterable<Patient> iterator = patientRepository.findAll();
 
     	for(Patient p: iterator) {
-	    	if (p.getCategory().equals(category)) {
+	    	if (p.getCategory().equalsIgnoreCase(category)) {
 	    		patients.add(p);
 	    	}
 	    }
@@ -338,7 +395,7 @@ public class MainController {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
-	    	if (p.getCategory().equals(category) && p.getChangeRate() > 0 ) {
+	    	if (p.getCategory().equalsIgnoreCase(category) && p.getChangeRate() > 0 ) {
 	    		patients.add(p);
 	    	}
 	    }
@@ -349,7 +406,7 @@ public class MainController {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
-	    	if (p.getCategory().equals(category) && p.getChangeRate() < 0 ) {
+	    	if (p.getCategory().equalsIgnoreCase(category) && p.getChangeRate() < 0 ) {
 	    		patients.add(p);
 	    	}
 	    }
@@ -360,7 +417,7 @@ public class MainController {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
-	    	if (p.getCategory().equals(category) && p.getChangeRate() > 0 ) {
+	    	if (p.getCategory().equalsIgnoreCase(category) && p.getChangeRate() > 0 ) {
 	    		patients.add(p);
 	    	}
 	    }
@@ -371,7 +428,7 @@ public class MainController {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
-	    	if (p.getCategory().equals(category) && p.getChangeRate() < 0 ) {
+	    	if (p.getCategory().equalsIgnoreCase(category) && p.getChangeRate() < 0 ) {
 	    		patients.add(p);
 	    	}
 	    }
@@ -382,7 +439,7 @@ public class MainController {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
-	    	if (p.getCategory().equals(category) && p.getGender().equals(gender) ) {
+	    	if (p.getCategory().equalsIgnoreCase(category) && p.getGender().equalsIgnoreCase(gender) ) {
 	    		patients.add(p);
 	    	}
 	    }
@@ -397,14 +454,14 @@ public class MainController {
 
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
-	    	if (p.getGender().equals(gender) ) {
-	    		if (p.getCategory().equals("MKCK")) {
+	    	if (p.getGender().equalsIgnoreCase(gender) ) {
+	    		if (p.getCategory().equalsIgnoreCase("MKCK")) {
 	    			patientsMKCK.add(p);
-	    		} else if (p.getCategory().equals("PD")) {
+	    		} else if (p.getCategory().equalsIgnoreCase("PD")) {
 	    			patientsPD.add(p);
-	    		} else if (p.getCategory().equals("HD")) {
+	    		} else if (p.getCategory().equalsIgnoreCase("HD")) {
 	    			patientsHD.add(p);
-	    		} else if (p.getCategory().equals("AHD")) {
+	    		} else if (p.getCategory().equalsIgnoreCase("AHD")) {
 	    			patientsAHD.add(p);
 	    		}
 	    	}
@@ -412,11 +469,31 @@ public class MainController {
 	    return new int[] {patientsMKCK.size(), patientsPD.size(), patientsHD.size(), patientsAHD.size()};
 	}
 
+	public int[] getScoreDistribution() {
+		int[] scoreCount =  {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	scoreCount[p.getScore()]++;
+	    }
+	    return scoreCount;
+	}
+
+	public int[] getScoreDistributionByCategory(String category) {
+		int[] scoreCount = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getCategory().equalsIgnoreCase(category)) {
+	    		scoreCount[p.getScore()]++;
+	    	}
+	    }
+	    return scoreCount;
+	}
+
 	public int countPatientsByGender(String gender) {
 		List<Patient> patients = new ArrayList<>();
     	Iterable<Patient> iterator = patientRepository.findAll();
 	    for(Patient p: iterator) {
-	    	if (p.getGender().equals(gender) ) {
+	    	if (p.getGender().equalsIgnoreCase(gender) ) {
 	    		patients.add(p);
 	    	}
 	    }
@@ -433,7 +510,7 @@ public class MainController {
 		    } catch (Exception exp) {
 
 			}
-	    	if (e.getPid().equals(pid) && testDate.after(sdate) && testDate.before(edate)) {
+	    	if (e.getPid().equalsIgnoreCase(pid) && testDate.after(sdate) && testDate.before(edate)) {
 	    		labTests.add(e);
 	    	}
 	    }
@@ -450,7 +527,7 @@ public class MainController {
 		    } catch (Exception exp) {
 
 			}
-	    	if (e.getPid().equals(pid) && testDate.after(sdate)) {
+	    	if (e.getPid().equalsIgnoreCase(pid) && testDate.after(sdate)) {
 	    		labTests.add(e);
 	    	}
 	    }
@@ -467,7 +544,7 @@ public class MainController {
 		    } catch (Exception exp) {
 
 			}
-	    	if (e.getPid().equals(pid) && testDate.before(edate)) {
+	    	if (e.getPid().equalsIgnoreCase(pid) && testDate.before(edate)) {
 	    		labTests.add(e);
 	    	}
 	    }
@@ -478,7 +555,7 @@ public class MainController {
 		List<LabTest> labTests = new ArrayList<>();
     	Iterable<LabTest> iterator = labTestRepository.findAll();
 	    for(LabTest e: iterator) {
-	    	if (e.getPid().equals(pid)) {
+	    	if (e.getPid().equalsIgnoreCase(pid)) {
 	    		labTests.add(e);
 	    	}
 	    }
@@ -525,6 +602,7 @@ public class MainController {
 		n.setMetformin(metformin);
 		n.setFurosemide(furosemide);
 
+		n.setScore();
 		patientRepository.save(n);
 		return "Saved";
 	}
