@@ -54,7 +54,8 @@
 	<script th:src="@{/chart/Chart.bundle.js}"></script>
 	<script th:src="@{/chart/utils.js}"></script>
 
-	<script type="text/javascript">
+	<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
 
 		function displayPatients(category, trend) {
 			window.location.href = "/focus?category=" + category + "&trend=" + trend; 
@@ -105,8 +106,61 @@
 		  });
 		});
 
-		window.onload = function () {makeAllSortable();};
+		var configPie1 = {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [1,1],
+					backgroundColor: [
+						window.chartColors.blue,
+						window.chartColors.red,
+					],
+					label: 'Gender Distribution'
+				}],
+				labels: [
+					'Male',
+					'Female',
+				]
+			},
+			options: {
+				responsive: true
+			}
+		};
+		configPie1.data.datasets[0].data = /*[[${gender}]]*/;
 
+		var configPie2 = {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [1,1],
+					backgroundColor: [
+						window.chartColors.green,
+						window.chartColors.orange,
+					],
+					label: 'Patients Condition'
+				}],
+				labels: [
+					'Getting Better',
+					'Getting Worse',
+				]
+			},
+			options: {
+				responsive: true
+			}
+		};
+		configPie2.data.datasets[0].data = /*[[${trend}]]*/;
+
+		window.onload = function() {
+			makeAllSortable();
+
+			var ctxPie1 = document.getElementById('canvas-pie1').getContext('2d');
+			window.myPie1 = new Chart(ctxPie1, configPie1);
+			var ctxPie2 = document.getElementById('canvas-pie2').getContext('2d');
+			window.myPie2 = new Chart(ctxPie2, configPie2);
+		};
+
+
+	/*]]>*/
 	</script>
 
 	</head>
@@ -147,6 +201,14 @@
 
 			<div class="fh5co-narrow-content fh5co-border-bottom">
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
+					<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
+	  					<canvas id="canvas-pie1"></canvas>
+	  				</div>
+
+	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
+	  					<canvas id="canvas-pie2"></canvas>
+	  				</div>
+
 					<div name="mkck intro diagram" class="row">
 						<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
 							<img src="images/Population.png" alt="KidneyWatch Population Diagram" class="img-responsive" >

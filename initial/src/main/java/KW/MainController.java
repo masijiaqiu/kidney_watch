@@ -165,6 +165,10 @@ public class MainController {
 	    int female = countPatientsByGenderWithCategory("MKCK", "F");
 	    model.addAttribute("male", male);
 	    model.addAttribute("female", female);
+
+	    model.addAttribute("gender", new int[]{male, female});
+	    model.addAttribute("trend", new int[]{better, worse});
+
         return "mkck";
     }
 

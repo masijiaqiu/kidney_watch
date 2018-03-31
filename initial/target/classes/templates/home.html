@@ -78,10 +78,14 @@
 			datasets: [{
 				label: 'Male',
 				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.red,
+				borderWidth: 1,
 				data: [2,3,2,3]
 			}, {
 				label: 'Female',
 				backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.blue,
+				borderWidth: 1,
 				data: [1,1,1,1]
 			}]
 
@@ -108,7 +112,7 @@
 						yAxes: [{
 							stacked: true
 						}],
-						barThickness : 40
+						barThickness : 50
 					}
 				}
 			});

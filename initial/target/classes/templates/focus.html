@@ -37,6 +37,10 @@
 
 	<script type="text/javascript">
 
+		function selectPatient(pid) {
+			window.location.href = "/individual?pid=" + pid + "&sdate=null&edate=null&firstName=null&lastName=null";
+		}
+
 		function sortTable(table, col, reverse) {
 		    var tb = table.tBodies[0], // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
 		        tr = Array.prototype.slice.call(tb.rows, 0), // put rows into array
@@ -118,11 +122,12 @@
 								<th>HTN</th>
 								<th>Diabetes</th>
 								<th>Depression</th>
+								<th>Category</th>
 								<th>Score</th>
 							</tr>
 						  </thead>
 						  <tbody>
-							<tr th:each="p:${patients}">
+							<tr th:each="p:${patients}" th:id="${p.pid}" onclick="selectPatient(this.id)">
 								<td th:text="${p.pid}" />
 								<td th:text="${p.firstName} + ' ' + ${p.lastName}" />
 								<td th:text="${p.dob}" />
@@ -135,6 +140,7 @@
 								<td th:text="${p.htn}" />
 								<td th:text="${p.diabetes}" />
 								<td th:text="${p.depression}" />
+								<td th:text="${p.category}" />
 								<td th:text="${p.score}" />
 							</tr>
 						  </tbody>

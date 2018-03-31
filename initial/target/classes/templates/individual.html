@@ -65,36 +65,6 @@
 	<script type="text/javascript" th:inline="javascript">
 	/*<![CDATA[*/
 
-		function submit() {
-			var pid = document.getElementById("patientid").value;
-			var sdate = document.getElementById("sdate").value;
-			var edate = document.getElementById("edate").value;
-			var firstName = document.getElementById("firstname").value;
-			var lastName = document.getElementById("lastname").value;
-
-			if((pid == ""|| pid == null) && (firstName == "" || firstName == null) && (lastName == "" || lastName == null)){
-				alert("Please input the patient ID or name");
-			}
-			
-			if (pid == "" || pid == null) {
-				pid = "null";
-			}
-			if (firstName == "" || firstName == null) {
-				firstName = "null";
-			}
-			if (lastName == "" || lastName == null) {
-				lastName = "null";
-			}
-			if (sdate == "" || sdate == null) {
-				sdate = "null";
-			}
-			if (edate == "" || edate == null) {
-				edate = "null";
-			}
-
-			window.location.href = "/individual?pid=" + pid + "&sdate=" + sdate + "&edate=" + edate + "&firstName=" + firstName + "&lastName=" + lastName;
-		}
-
 		cancerNotes = /*[[${cancerNotes}]]*/;
 		smokingNotes = /*[[${smokingNotes}]]*/;
 		htnNotes = /*[[${htnNotes}]]*/;
@@ -145,8 +115,6 @@
 		    var t = parent.getElementsByTagName('table'), i = t.length;
 		    while (--i >= 0) makeSortable(t[i]);
 		}
-
-		window.onload = function () {makeAllSortable();};
 
 		// line chart
 		var configLine1 = {
@@ -343,6 +311,8 @@
 		}
 
 		window.onload = function() {
+			makeAllSortable();
+
 			var ctxLine1 = document.getElementById('canvas-line').getContext('2d');
 			window.myLine1 = new Chart(ctxLine1, configLine1);
 			var ctxLine2 = document.getElementById('canvas-line2').getContext('2d');
@@ -382,44 +352,8 @@
 				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Welcome to KidneyWatch</h2>
 
 				<div class="animate-box">
-					<form action="javascript:submit()">
-					<div>
-						<label for="party">Patient ID:</label>
-		    			<input type="text" id="patientid" name="patientid">
-		    			<span class="validity"></span>
-					</div>
-	  				<div>
-		    			<label for="party">Starting Date:</label>
-		    			<input type="date" id="sdate" name="party" min="2015-04-01" max="2017-03-20" required>
-		    			<span class="validity"></span>
-	  				</div>
-	  				<div>
-		    			<label for="party">Ending Date:</label>
-		    			<input type="date" id="edate" name="party" min="2015-04-01" max="2017-03-20" required>
-		    			<span class="validity"></span>
-	  				</div>
-	  				<div>
-	    				<input type="submit" >
-	  				</div>
-	  				</form>
-
-	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
-	  					<canvas id="canvas-line"></canvas>
-	  				</div>
-
-	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
-	  					<canvas id="canvas-line2"></canvas>
-	  				</div>
 
 					<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
-	  					<canvas id="canvas-pie1"></canvas>
-	  				</div>
-
-	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
-	  					<canvas id="canvas-pie2"></canvas>
-	  				</div>
-
-	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
 						<table class="pop-table" border="0">
 						  <thead>
 							<tr>
@@ -453,6 +387,22 @@
 						  </tbody>
 						</table>
 					</div>
+
+	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
+	  					<canvas id="canvas-line"></canvas>
+	  				</div>
+
+	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
+	  					<canvas id="canvas-line2"></canvas>
+	  				</div>
+
+					<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
+	  					<canvas id="canvas-pie1"></canvas>
+	  				</div>
+
+	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
+	  					<canvas id="canvas-pie2"></canvas>
+	  				</div>
 
 					<div name="mkck main table" id="lab-results" class="fh5co-narrow-content fh5co-border-bottom row">
 						<table class="pop-table" border="0">
