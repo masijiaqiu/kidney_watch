@@ -51,31 +51,63 @@ public class MainController {
 
     @GetMapping("/individual")
     public String individual(Model model, @RequestParam String pid
+    	, @RequestParam String firstName, @RequestParam String lastName
     	, @RequestParam String sdate, @RequestParam String edate) {
-    	try{
-	    	Patient p = findByPid(pid);
-	    	model.addAttribute("patient", p);
 
-	    	Date start = new Date();
-	    	Date end = new Date();
+    	if (pid.equals("null")) {
+    		List<Patient> patients = new ArrayList<>();
+    		if (lastName.equals("null")) {
+    			patients = getPatientsByFirstName(firstName);
+    		} else if (firstName.equals("null")) {
+    			patients = getPatientsByLastName(lastName);
+    		} else {
+    			patients = getPatientsByName(firstName, lastName);
+    		}
+    		model.addAttribute("patients", patients);
+    		return "multiple";
+    	} else {
+	    	try{
+		    	Patient p = findByPid(pid);
+		    	model.addAttribute("patients", p);
 
-	    	try {
-		    	start = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
-		    	end = new SimpleDateFormat("yyyy-MM-dd").parse(edate);
+		    	if (! (sdate.equals("null") || edate.equals("null"))) {
+			    	Date start = new Date();
+			    	Date end = new Date();
+
+			    	try {
+				    	start = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
+				    	end = new SimpleDateFormat("yyyy-MM-dd").parse(edate);
+				    } catch (Exception e) {
+
+					}
+			    	model.addAttribute("labTests", getLabTestsByPidWithDate(pid, start, end));
+			    } else if (sdate.equals("null") && ! edate.equals("null")) {
+			    	Date end = new Date();
+			    	try {
+				    	end = new SimpleDateFormat("yyyy-MM-dd").parse(edate);
+				    } catch (Exception e) {
+
+					}
+			    	model.addAttribute("labTests", getLabTestsByPidWithEndDate(pid, end));
+			    } else if (! sdate.equals("null") && edate.equals("null")) {
+			    	Date start = new Date();
+			    	try {
+				    	start = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
+				    } catch (Exception e) {
+
+					}
+			    	model.addAttribute("labTests", getLabTestsByPidWithStartDate(pid, start));
+			    } else {
+			    	model.addAttribute("labTests", getLabTestsByPid(pid));
+			    }
+		    	return "individual";
 		    } catch (Exception e) {
 
-			}
-	    	model.addAttribute("labTests", getLabTestsByPidWithDate(pid, start, end));
-	    } catch (Exception e) {
+		    }
+		}
 
-	    }
-        return "individual";
+		return "search";
     }
-
-    // @GetMapping("/population")
-    // public String population(Model model) {
-    //     return "population";
-    // }
 
     @GetMapping("/mkck")
     public String mkck(Model model) {
@@ -156,6 +188,42 @@ public class MainController {
     	}
 
     	return re;
+	}
+
+	public List<Patient> getPatientsByFirstName(String firstName) {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+
+    	for(Patient p: iterator) {
+	    	if (p.getFirstName().equalsIgnoreCase(firstName)) {
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients;
+	}
+
+	public List<Patient> getPatientsByLastName(String lastName) {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+
+    	for(Patient p: iterator) {
+	    	if (p.getLastName().equalsIgnoreCase(lastName)) {
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients;
+	}
+
+	public List<Patient> getPatientsByName(String firstName, String lastName) {
+		List<Patient> patients = new ArrayList<>();
+    	Iterable<Patient> iterator = patientRepository.findAll();
+
+    	for(Patient p: iterator) {
+	    	if (p.getFirstName().equalsIgnoreCase(firstName) && p.getLastName().equalsIgnoreCase(lastName)) {
+	    		patients.add(p);
+	    	}
+	    }
+	    return patients;
 	}
 
 	public List<Patient> getCategoryPatients(String category) {
@@ -291,6 +359,51 @@ public class MainController {
 
 			}
 	    	if (e.getPid().equals(pid) && testDate.after(sdate) && testDate.before(edate)) {
+	    		labTests.add(e);
+	    	}
+	    }
+	    return labTests;
+	}
+
+	public List<LabTest> getLabTestsByPidWithStartDate(String pid, Date sdate) {
+		List<LabTest> labTests = new ArrayList<>();
+    	Iterable<LabTest> iterator = labTestRepository.findAll();
+	    for(LabTest e: iterator) {
+	    	Date testDate = new Date();
+	    	try {
+		    	testDate = new SimpleDateFormat("yyyy-MM-dd").parse(e.getTestDate());
+		    } catch (Exception exp) {
+
+			}
+	    	if (e.getPid().equals(pid) && testDate.after(sdate)) {
+	    		labTests.add(e);
+	    	}
+	    }
+	    return labTests;
+	}
+
+	public List<LabTest> getLabTestsByPidWithEndDate(String pid, Date edate) {
+		List<LabTest> labTests = new ArrayList<>();
+    	Iterable<LabTest> iterator = labTestRepository.findAll();
+	    for(LabTest e: iterator) {
+	    	Date testDate = new Date();
+	    	try {
+		    	testDate = new SimpleDateFormat("yyyy-MM-dd").parse(e.getTestDate());
+		    } catch (Exception exp) {
+
+			}
+	    	if (e.getPid().equals(pid) && testDate.before(edate)) {
+	    		labTests.add(e);
+	    	}
+	    }
+	    return labTests;
+	}
+
+	public List<LabTest> getLabTestsByPid(String pid) {
+		List<LabTest> labTests = new ArrayList<>();
+    	Iterable<LabTest> iterator = labTestRepository.findAll();
+	    for(LabTest e: iterator) {
+	    	if (e.getPid().equals(pid)) {
 	    		labTests.add(e);
 	    	}
 	    }

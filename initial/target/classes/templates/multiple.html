@@ -47,27 +47,63 @@
 				alert("Please input the patient ID or name");
 			}
 			
-			if (pid == "" || pid == null) {
-				pid = "null";
+			if (pid == ""|| pid == null) {
+				pid = "#";
 			}
 			if (firstName == "" || firstName == null) {
-				firstName = "null";
+				firstName = "#";
 			}
 			if (lastName == "" || lastName == null) {
-				lastName = "null";
+				lastName = "#";
 			}
 			if (sdate == "" || sdate == null) {
-				sdate = "null";
+				sdate = "#";
 			}
 			if (edate == "" || edate == null) {
-				edate = "null";
+				edate = "#";
 			}
 
 			window.location.href = "/individual?pid=" + pid + "&sdate=" + sdate + "&edate=" + edate + "&firstName=" + firstName + "&lastName=" + lastName;
 		}
 
-	</script>
+		function selectPatient(pid) {
+			window.location.href = "/individual?pid=" + pid + "&sdate=#&edate=#&firstName=#&lastName=#";
+		}
 
+		function sortTable(table, col, reverse) {
+		    var tb = table.tBodies[0], // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
+		        tr = Array.prototype.slice.call(tb.rows, 0), // put rows into array
+		        i;
+		    reverse = -((+reverse) || -1);
+		    tr = tr.sort(function (a, b) { // sort rows
+		        return reverse // `-1 *` if want opposite order
+		            * (a.cells[col].textContent.trim() // using `.textContent.trim()` for test
+		                .localeCompare(b.cells[col].textContent.trim())
+		               );
+		    });
+		    for(i = 0; i < tr.length; ++i) tb.appendChild(tr[i]); // append each row in order
+		}
+
+		function makeSortable(table) {
+		    var th = table.tHead, i;
+		    th && (th = th.rows[0]) && (th = th.cells);
+		    if (th) i = th.length;
+		    else return; // if no `<thead>` then do nothing
+		    while (--i >= 0) (function (i) {
+		        var dir = 1;
+		        th[i].addEventListener('click', function () {sortTable(table, i, (dir = 1 - dir))});
+		    }(i));
+		}
+
+		function makeAllSortable(parent) {
+		    parent = parent || document.body;
+		    var t = parent.getElementsByTagName('table'), i = t.length;
+		    while (--i >= 0) makeSortable(t[i]);
+		}
+
+		window.onload = function () {makeAllSortable();};
+
+	</script>
 
 	</head>
 	<body>
@@ -124,8 +160,42 @@
 	    				<input type="submit" >
 	  				</div>
 					</form>
-				</div>
 
+	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
+						<table class="pop-table" border="0">
+						  <thead>
+							<tr>
+								<th>Patient ID</th>
+								<th>Name</th>
+								<th>D.O.B</th>
+								<th>Gender</th>
+								<th>Smoking</th>
+								<th>Cancer</th>
+								<th>HTN</th>
+								<th>Diabetes</th>
+								<th>Depression</th>
+								<th>Category</th>
+								<th>Score</th>
+							</tr>
+						  </thead>
+						  <tbody>
+							<tr th:each="p:${patients}" th:id="${p.pid}" onclick="selectPatient(this.id)">
+								<td th:text="${p.pid}" />
+								<td th:text="${p.firstName} + ' ' + ${p.lastName}" />
+								<td th:text="${p.dob}" />
+								<td th:text="${p.gender}" />
+								<td th:text="${p.smoking}" />
+								<td th:text="${p.cancer}" />
+								<td th:text="${p.htn}" />
+								<td th:text="${p.diabetes}" />
+								<td th:text="${p.depression}" />
+								<td th:text="${p.score}" />
+								<td th:text="${p.category}" />
+							</tr>
+						  </tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
