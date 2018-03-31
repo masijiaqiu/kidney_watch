@@ -114,9 +114,9 @@
 								<th>Name</th>
 								<th>D.O.B</th>
 								<th>Gender</th>
-								<th>Date</th>
-								<th>eGFR</th>
-								<th>+/- eGFR/mon</th>
+								<!-- <th>Date</th> -->
+								<th>Latest eGFR</th>
+								<th>eGFR Change</th>
 								<th>Smoking</th>
 								<th>Cancer</th>
 								<th>HTN</th>
@@ -132,7 +132,7 @@
 								<td th:text="${p.firstName} + ' ' + ${p.lastName}" />
 								<td th:text="${p.dob}" />
 								<td th:text="${p.gender}" />
-								<td th:text="${p.testDate}" />
+								<!-- <td th:text="${p.testDate}" /> -->
 								<td th:text="${p.egfr}" />
 								<td th:text="${p.changeRate}" />
 								<td th:text="${p.smoking}" />
