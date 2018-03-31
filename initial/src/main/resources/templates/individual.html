@@ -107,25 +107,21 @@
 	</script>
 
 	<!-- Line chart -->
-	<script>
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+
 		var MONTHS1 = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+		
 		var configLine1 = {
 			type: 'line',
 			data: {
-				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+				labels: [],
 				datasets: [{
 					label: 'My First dataset',
 					backgroundColor: window.chartColors.red,
 					borderColor: window.chartColors.red,
-					data: [
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor()
-					],
+					data: [],
 					fill: false,
 				}]
 			},
@@ -161,6 +157,8 @@
 				}
 			}
 		};
+		configLine1.data.labels = /*[[${oneArray}]]*/;
+		configLine1.data.datasets[0].data =  /*[[${anotherArray}]]*/ ;
 
 		var MONTHS2 = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 		var configLine2 = {
@@ -278,6 +276,8 @@
 			var ctxPie2 = document.getElementById('canvas-pie2').getContext('2d');
 			window.myPie2 = new Chart(ctxPie2, configPie2);
 		};
+
+	/*]]>*/
 	</script>
 
 	<!--Pie chart-->
