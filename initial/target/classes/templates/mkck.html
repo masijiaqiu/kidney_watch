@@ -56,6 +56,10 @@
 			window.location.href = "/focus?category=" + category + "&trend=" + trend; 
 		}
 
+		function selectPatient(pid) {
+			window.location.href = "/individual?pid=" + pid + "&sdate=null&edate=null&firstName=null&lastName=null";
+		}
+
 		function sortTable(table, col, reverse) {
 		    var tb = table.tBodies[0], // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
 		        tr = Array.prototype.slice.call(tb.rows, 0), // put rows into array
@@ -143,18 +147,18 @@
 						<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
 							<img src="images/Population.png" alt="KidneyWatch Population Diagram" class="img-responsive" >
 							<h3 class="fh5co-work-title">Population Trend</h3>
-							<!-- <p>Brief Description</p> -->
+							<p>2012 - 2018</p>
 						</div>
 						<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
 							<img src="images/work_2.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
 							<h3 class="fh5co-work-title">Age Distribution</h3>
-							<!-- <p>Brief Description</p> -->
+							<p>2018-04-01</p>
 						</div>
 						<div class="clearfix visible-sm-block"></div>
 						<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
 							<img src="images/work_3.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
 							<h3 class="fh5co-work-title">Gender Distribution</h3>
-							<!-- <p>Brief Description</p> -->
+							<p>2018-04-01</p>
 						</div>
 					</div>
 				</div>
@@ -182,7 +186,7 @@
 							</tr>
 						  </thead>
 						  <tbody>
-							<tr th:each="p:${patients}">
+							<tr th:each="p:${patients}" th:id="${p.pid}" onclick="selectPatient(this.id)" >
 								<td th:text="${p.pid}" />
 								<td th:text="${p.firstName} + ' ' + ${p.lastName}" />
 								<td th:text="${p.dob}" />

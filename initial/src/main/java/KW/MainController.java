@@ -70,6 +70,12 @@ public class MainController {
 		    	Patient p = findByPid(pid);
 		    	model.addAttribute("patients", p);
 
+		    	model.addAttribute("cancerNotes", p.getCancerNotes());
+		    	model.addAttribute("smokingNotes", p.getSmokingNotes());
+		    	model.addAttribute("htnNotes", p.getHtnNotes());
+		    	model.addAttribute("depressionNotes", p.getDepressionNotes());
+		    	model.addAttribute("diabetesNotes", p.getDiabetesNotes());
+
 		    	List<String> medicationData = new ArrayList<>();
 		    	medicationData.add(p.getAsprin());
 		    	medicationData.add(p.getAmitriptyline());

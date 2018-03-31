@@ -62,7 +62,8 @@
 		}
 	</style>
 
-	<script type="text/javascript">
+	<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
 
 		function submit() {
 			var pid = document.getElementById("patientid").value;
@@ -92,6 +93,26 @@
 			}
 
 			window.location.href = "/individual?pid=" + pid + "&sdate=" + sdate + "&edate=" + edate + "&firstName=" + firstName + "&lastName=" + lastName;
+		}
+
+		cancerNotes = /*[[${cancerNotes}]]*/;
+		smokingNotes = /*[[${smokingNotes}]]*/;
+		htnNotes = /*[[${htnNotes}]]*/;
+		depressionNotes = /*[[${depressionNotes}]]*/;
+		diabetesNotes = /*[[${diabetesNotes}]]*/;
+
+		function showNotes(id) {
+			if (id == "cancer") {
+				alert(cancerNotes);
+			} else if (id == "smoking") {
+				alert(smokingNotes);
+			} else if (id == "htn") {
+				alert(htnNotes);
+			} else if (id == "depression") {
+				alert(depressionNotes);
+			} else if (id == "diabetes") {
+				alert(diabetesNotes);
+			}
 		}
 
 		function sortTable(table, col, reverse) {
@@ -127,12 +148,7 @@
 
 		window.onload = function () {makeAllSortable();};
 
-	</script>
-
-	<!-- Line chart -->
-	<script th:inline="javascript">
-	/*<![CDATA[*/
-
+		// line chart
 		var configLine1 = {
 			type: 'line',
 			data: {
@@ -340,8 +356,6 @@
 	/*]]>*/
 	</script>
 
-	<!--Pie chart-->
-
 
 	</head>
 	<body>
@@ -428,11 +442,11 @@
 								<td th:text="${p.firstName} + ' ' + ${p.lastName}" />
 								<td th:text="${p.dob}" />
 								<td th:text="${p.gender}" />
-								<td th:text="${p.smoking}" />
-								<td th:text="${p.cancer}" />
-								<td th:text="${p.htn}" />
-								<td th:text="${p.diabetes}" />
-								<td th:text="${p.depression}" />
+								<td th:text="${p.smoking}" id="smoking" onclick="showNotes(this.id)"/>
+								<td th:text="${p.cancer}" id="cancer" onclick="showNotes(this.id)"/>
+								<td th:text="${p.htn}" id="htn" onclick="showNotes(this.id)"/>
+								<td th:text="${p.diabetes}" id="diabetes" onclick="showNotes(this.id)"/>
+								<td th:text="${p.depression}" id="depression" onclick="showNotes(this.id)"/>
 								<td th:text="${p.category}" />
 								<td th:text="${p.score}" />
 							</tr>
