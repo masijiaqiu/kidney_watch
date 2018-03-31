@@ -242,6 +242,19 @@ figure {
   margin: 0 auto;
   padding: 4em 0;
 }
+#fh5co-main .fh5co-narrow-chart {
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
+  padding: 4em 0;
+}
+@media screen and (max-width: 768px) {
+  #fh5co-main .fh5co-narrow-chart {
+    width: 80%;
+    padding: 3.5em 1em;
+  }
+}
+
 @media screen and (max-width: 768px) {
   #fh5co-main .fh5co-narrow-content {
     width: 100%;
