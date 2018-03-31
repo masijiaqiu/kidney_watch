@@ -73,33 +73,27 @@
 	</style>
 
 	<script th:inline="javascript">
+	/*<![CDATA[*/
+
 		var barChartData = {
 			labels: ['MKCK', 'PD', 'HD', 'AHD'],
 			datasets: [{
 				label: 'Male',
-<<<<<<< HEAD
-				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-				borderColor: window.chartColors.red,
-				borderWidth: 1,
-				data: [2,3,2,3]
-			}, {
-				label: 'Female',
-				backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
-				borderColor: window.chartColors.blue,
-				borderWidth: 1,
-=======
 				backgroundColor: '#BACCA9',
 				// borderColor: window.chartColors.red,
 				// borderWidth: 1,
-				data: [2,3,2,3]
+				data: []
 			}, {
 				label: 'Female',
 				backgroundColor: '#E89E8A',
->>>>>>> 0f1344ddda590fd20f59b41bf43c570ab29e6091
-				data: [1,1,1,1]
+				data: []
 			}]
 
 		};
+
+		barChartData.datasets[0].data = /*[[${maleCategory}]]*/;
+		barChartData.datasets[1].data = /*[[${femaleCategory}]]*/;
+
 		window.onload = function() {
 			var ctx = document.getElementById('canvas-dist').getContext('2d');
 			window.myBar = new Chart(ctx, {
@@ -122,16 +116,13 @@
 						}],
 						yAxes: [{
 							stacked: true
-<<<<<<< HEAD
-						}],
-						barThickness : 50
-=======
 						}]
->>>>>>> 0f1344ddda590fd20f59b41bf43c570ab29e6091
 					}
 				}
 			});
 		};	
+
+	/*]]>*/
 	</script>
 
 	</head>

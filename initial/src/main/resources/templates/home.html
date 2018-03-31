@@ -73,6 +73,8 @@
 	</style>
 
 	<script th:inline="javascript">
+	/*<![CDATA[*/
+
 		var barChartData = {
 			labels: ['MKCK', 'PD', 'HD', 'AHD'],
 			datasets: [{
@@ -80,14 +82,18 @@
 				backgroundColor: '#BACCA9',
 				// borderColor: window.chartColors.red,
 				// borderWidth: 1,
-				data: [2,3,2,3]
+				data: []
 			}, {
 				label: 'Female',
 				backgroundColor: '#E89E8A',
-				data: [1,1,1,1]
+				data: []
 			}]
 
 		};
+
+		barChartData.datasets[0].data = /*[[${maleCategory}]]*/;
+		barChartData.datasets[1].data = /*[[${femaleCategory}]]*/;
+
 		window.onload = function() {
 			var ctx = document.getElementById('canvas-dist').getContext('2d');
 			window.myBar = new Chart(ctx, {
@@ -115,6 +121,8 @@
 				}
 			});
 		};	
+
+	/*]]>*/
 	</script>
 
 	</head>

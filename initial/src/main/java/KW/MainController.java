@@ -41,6 +41,11 @@ public class MainController {
 	    model.addAttribute("male", male);
 	    model.addAttribute("female", female);
 
+	    int[] maleCategory = countPatientsByGenderByCategory("M");
+	    int[] femaleCategory = countPatientsByGenderByCategory("F");
+	    model.addAttribute("maleCategory", maleCategory);
+	    model.addAttribute("femaleCategory", femaleCategory);
+
         return "home";
     }
 
@@ -382,6 +387,29 @@ public class MainController {
 	    	}
 	    }
 	    return patients.size();
+	}
+
+	public int[] countPatientsByGenderByCategory(String gender) {
+		List<Patient> patientsMKCK = new ArrayList<>();
+		List<Patient> patientsPD = new ArrayList<>();
+		List<Patient> patientsHD = new ArrayList<>();
+		List<Patient> patientsAHD = new ArrayList<>();
+
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getGender().equals(gender) ) {
+	    		if (p.getCategory().equals("MKCK")) {
+	    			patientsMKCK.add(p);
+	    		} else if (p.getCategory().equals("PD")) {
+	    			patientsPD.add(p);
+	    		} else if (p.getCategory().equals("HD")) {
+	    			patientsHD.add(p);
+	    		} else if (p.getCategory().equals("AHD")) {
+	    			patientsAHD.add(p);
+	    		}
+	    	}
+	    }
+	    return new int[] {patientsMKCK.size(), patientsPD.size(), patientsHD.size(), patientsAHD.size()};
 	}
 
 	public int countPatientsByGender(String gender) {
