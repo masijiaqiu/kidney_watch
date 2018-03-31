@@ -48,11 +48,13 @@
 	<!-- Waypoints -->
 	<script th:src="@{/js/jquery.waypoints.min.js}"></script>
 	<!-- Counters -->
-	<script th:src="@{/js/jquery.countTo.js}"></script>
-	
-	
+	<script th:src="@{/js/jquery.countTo.js}"></script>	
 	<!-- MAIN JS -->
 	<script th:src="@{/js/main.js}"></script>
+
+
+	<script th:src="@{/chart/Chart.bundle.js}"></script>
+	<script th:src="@{/chart/utils.js}"></script>
 
 	<script type="text/javascript">
 
@@ -60,6 +62,57 @@
 			window.location.href = "/focus?category=" + category + "&trend=" + trend; 
 		}
 
+	</script>
+
+	<style>
+		canvas{
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+
+	<script th:inline="javascript">
+		var barChartData = {
+			labels: ['MKCK', 'PD', 'HD', 'AHD'],
+			datasets: [{
+				label: 'Male',
+				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+				data: [2,3,2,3]
+			}, {
+				label: 'Female',
+				backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+				data: [1,1,1,1]
+			}]
+
+		};
+		window.onload = function() {
+			var ctx = document.getElementById('canvas-dist').getContext('2d');
+			window.myBar = new Chart(ctx, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					title: {
+						display: true,
+						text: 'General Distribution of the Population'
+					},
+					tooltips: {
+						mode: 'index',
+						intersect: false
+					},
+					responsive: true,
+					scales: {
+						xAxes: [{
+							stacked: true,
+						}],
+						yAxes: [{
+							stacked: true
+						}],
+						barThickness : 40
+					}
+				}
+			});
+		};	
 	</script>
 
 	</head>
@@ -96,46 +149,11 @@
 						<li th:text="${worse} + ' patients are getting worse'" onclick="displayPatients('all', 'worse')"/>
 					</div>
 				</div>
-
-				<div class="row animate-box" data-animate-effect="fadeInLeft">
-					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-						<img src="images/work_1.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
-						<h3 class="fh5co-work-title">Diagram Title Here</h3>
-						<p>Brief Description</p>
-					</div>
-					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-						<img src="images/work_2.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
-						<h3 class="fh5co-work-title">Diagram Title Here</h3>
-						<p>Brief Description</p>
-					</div>
-					<div class="clearfix visible-sm-block"></div>
-					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-						<img src="images/work_3.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
-						<h3 class="fh5co-work-title">Diagram Title Here</h3>
-						<p>Brief Description</p>
-					</div>
-					<div class="clearfix visible-md-block"></div>
-					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-						<img src="images/work_4.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
-						<h3 class="fh5co-work-title">Diagram Title Here</h3>
-						<p>Brief Description</p>
-					</div>
-					<div class="clearfix visible-sm-block"></div>
-					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-						<img src="images/work_5.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
-						<h3 class="fh5co-work-title">Diagram Title Here</h3>
-						<p>Brief Description</p>
-					</div>
-					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
-						<img src="images/work_6.jpg" alt="KidneyWatch Population Diagram" class="img-responsive" >
-						<h3 class="fh5co-work-title">Diagram Title Here</h3>
-						<p>Brief Description</p>
-					</div>
-					<div class="clearfix visible-md-block visible-sm-block"></div>
-					<div class="clearfix visible-md-block"></div>	
-				</div>
-
 			</div>
+
+			<div name="mkck main table" id="individual-report" class="fh5co-narrow-chart fh5co-border-bottom row animate-box" data-animate-effect="fadeInLeft">
+	  			<canvas id="canvas-dist"></canvas>
+	  		</div>
 		</div>
 	</div>
 
