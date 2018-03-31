@@ -133,6 +133,12 @@
 	<script th:inline="javascript">
 	/*<![CDATA[*/
 
+<<<<<<< Updated upstream
+=======
+		var MONTHS1 = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+		
+>>>>>>> Stashed changes
 		var configLine1 = {
 			type: 'line',
 			data: {
@@ -177,8 +183,13 @@
 				}
 			}
 		};
+<<<<<<< Updated upstream
 		configLine1.data.labels = /*[[${dateLabels}]]*/;
 		configLine1.data.datasets[0].data =  /*[[${labValues}]]*/ ;
+=======
+		configLine1.data.labels = /*[[${oneArray}]]*/;
+		configLine1.data.datasets[0].data =  /*[[${anotherArray}]]*/ ;
+>>>>>>> Stashed changes
 
 		var configLine2 = {
 			type: 'line',
