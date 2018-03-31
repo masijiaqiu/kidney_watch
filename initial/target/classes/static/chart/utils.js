@@ -92,7 +92,8 @@ window.chartColors = {
 			var i;
 
 			for (i = min; i < max; i += step) {
-				values.push(prefix + Math.round(dfactor * i) / dfactor);
+				// values.push(prefix + Math.round(dfactor * i) / dfactor);
+				values.push(prefix);
 			}
 
 			return values;

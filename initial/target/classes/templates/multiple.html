@@ -47,27 +47,27 @@
 				alert("Please input the patient ID or name");
 			}
 			
-			if (pid == ""|| pid == null) {
-				pid = "#";
+			if (pid == "" || pid == null) {
+				pid = "null";
 			}
 			if (firstName == "" || firstName == null) {
-				firstName = "#";
+				firstName = "null";
 			}
 			if (lastName == "" || lastName == null) {
-				lastName = "#";
+				lastName = "null";
 			}
 			if (sdate == "" || sdate == null) {
-				sdate = "#";
+				sdate = "null";
 			}
 			if (edate == "" || edate == null) {
-				edate = "#";
+				edate = "null";
 			}
 
 			window.location.href = "/individual?pid=" + pid + "&sdate=" + sdate + "&edate=" + edate + "&firstName=" + firstName + "&lastName=" + lastName;
 		}
 
 		function selectPatient(pid) {
-			window.location.href = "/individual?pid=" + pid + "&sdate=#&edate=#&firstName=#&lastName=#";
+			window.location.href = "/individual?pid=" + pid + "&sdate=null&edate=null&firstName=null&lastName=null";
 		}
 
 		function sortTable(table, col, reverse) {

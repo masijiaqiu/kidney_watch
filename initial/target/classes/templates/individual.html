@@ -68,7 +68,30 @@
 			var pid = document.getElementById("patientid").value;
 			var sdate = document.getElementById("sdate").value;
 			var edate = document.getElementById("edate").value;
-			window.location.href = "/individual?pid=" + pid + "&sdate=" + sdate + "&edate=" + edate;
+			var firstName = document.getElementById("firstname").value;
+			var lastName = document.getElementById("lastname").value;
+
+			if((pid == ""|| pid == null) && (firstName == "" || firstName == null) && (lastName == "" || lastName == null)){
+				alert("Please input the patient ID or name");
+			}
+			
+			if (pid == "" || pid == null) {
+				pid = "null";
+			}
+			if (firstName == "" || firstName == null) {
+				firstName = "null";
+			}
+			if (lastName == "" || lastName == null) {
+				lastName = "null";
+			}
+			if (sdate == "" || sdate == null) {
+				sdate = "null";
+			}
+			if (edate == "" || edate == null) {
+				edate = "null";
+			}
+
+			window.location.href = "/individual?pid=" + pid + "&sdate=" + sdate + "&edate=" + edate + "&firstName=" + firstName + "&lastName=" + lastName;
 		}
 
 		function sortTable(table, col, reverse) {
@@ -107,25 +130,18 @@
 	</script>
 
 	<!-- Line chart -->
-	<script>
-		var MONTHS1 = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+
 		var configLine1 = {
 			type: 'line',
 			data: {
-				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+				labels: [],
 				datasets: [{
-					label: 'My First dataset',
+					label: 'eGFR Values',
 					backgroundColor: window.chartColors.red,
 					borderColor: window.chartColors.red,
-					data: [
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor()
-					],
+					data: [],
 					fill: false,
 				}]
 			},
@@ -161,8 +177,9 @@
 				}
 			}
 		};
+		configLine1.data.labels = /*[[${dateLabels}]]*/;
+		configLine1.data.datasets[0].data =  /*[[${labValues}]]*/ ;
 
-		var MONTHS2 = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 		var configLine2 = {
 			type: 'line',
 			data: {
@@ -222,10 +239,10 @@
 				datasets: [{
 					data: [1,1,1,1],
 					backgroundColor: [
-						window.chartColors.orange,
 						window.chartColors.grey,
 						window.chartColors.grey,
-						window.chartColors.blue,
+						window.chartColors.grey,
+						window.chartColors.grey,
 					],
 					label: 'Medicine'
 				}],
@@ -240,6 +257,27 @@
 				responsive: true
 			}
 		};
+		medicationData = /*[[${medicationData}]]*/;
+		if (medicationData[0] == "Yes") {
+			configPie1.data.datasets[0].backgroundColor[0] = window.chartColors.orange;
+		} else {
+			configPie1.data.datasets[0].backgroundColor[0] = window.chartColors.grey;
+		}
+		if (medicationData[1] == "Yes") {
+			configPie1.data.datasets[0].backgroundColor[1] = window.chartColors.green;
+		} else {
+			configPie1.data.datasets[0].backgroundColor[1] = window.chartColors.grey;
+		}
+		if (medicationData[2] == "Yes") {
+			configPie1.data.datasets[0].backgroundColor[2] = window.chartColors.yellow;
+		} else {
+			configPie1.data.datasets[0].backgroundColor[2] = window.chartColors.grey;
+		}
+		if (medicationData[3] == "Yes") {
+			configPie1.data.datasets[0].backgroundColor[3] = window.chartColors.blue;
+		} else {
+			configPie1.data.datasets[0].backgroundColor[3] = window.chartColors.grey;
+		}
 
 		var configPie2 = {
 			type: 'pie',
@@ -247,16 +285,16 @@
 				datasets: [{
 					data: [1,1,1,1,1],
 					backgroundColor: [
-						window.chartColors.blue,
 						window.chartColors.grey,
-						window.chartColors.yellow,
-						window.chartColors.green,
+						window.chartColors.grey,
+						window.chartColors.grey,
+						window.chartColors.grey,
 						window.chartColors.grey,
 					],
 					label: 'Comorbidity'
 				}],
 				labels: [
-					'Smoker',
+					'Smoking',
 					'Cancer',
 					'HTN',
 					'Diabetes',
@@ -267,6 +305,32 @@
 				responsive: true
 			}
 		};
+		comorbidityData = /*[[${comorbidityData}]]*/;
+		if (comorbidityData[0] == "Yes") {
+			configPie2.data.datasets[0].backgroundColor[0] = window.chartColors.orange;
+		} else {
+			configPie2.data.datasets[0].backgroundColor[0] = window.chartColors.grey;
+		}
+		if (comorbidityData[1] == "Yes") {
+			configPie2.data.datasets[0].backgroundColor[1] = window.chartColors.green;
+		} else {
+			configPie2.data.datasets[0].backgroundColor[1] = window.chartColors.grey;
+		}
+		if (comorbidityData[2] == "Yes") {
+			configPie2.data.datasets[0].backgroundColor[2] = window.chartColors.yellow;
+		} else {
+			configPie2.data.datasets[0].backgroundColor[2] = window.chartColors.grey;
+		}
+		if (comorbidityData[3] == "Yes") {
+			configPie2.data.datasets[0].backgroundColor[3] = window.chartColors.blue;
+		} else {
+			configPie2.data.datasets[0].backgroundColor[3] = window.chartColors.grey;
+		}
+		if (comorbidityData[4] == "Yes") {
+			configPie2.data.datasets[0].backgroundColor[4] = window.chartColors.red;
+		} else {
+			configPie2.data.datasets[0].backgroundColor[4] = window.chartColors.grey;
+		}
 
 		window.onload = function() {
 			var ctxLine1 = document.getElementById('canvas-line').getContext('2d');
@@ -278,6 +342,8 @@
 			var ctxPie2 = document.getElementById('canvas-pie2').getContext('2d');
 			window.myPie2 = new Chart(ctxPie2, configPie2);
 		};
+
+	/*]]>*/
 	</script>
 
 	<!--Pie chart-->
@@ -373,8 +439,8 @@
 								<td th:text="${p.htn}" />
 								<td th:text="${p.diabetes}" />
 								<td th:text="${p.depression}" />
-								<td th:text="${p.score}" />
 								<td th:text="${p.category}" />
+								<td th:text="${p.score}" />
 							</tr>
 						  </tbody>
 						</table>

@@ -70,6 +70,22 @@ public class MainController {
 		    	Patient p = findByPid(pid);
 		    	model.addAttribute("patients", p);
 
+		    	List<String> medicationData = new ArrayList<>();
+		    	medicationData.add(p.getAsprin());
+		    	medicationData.add(p.getAmitriptyline());
+		    	medicationData.add(p.getMetformin());
+		    	medicationData.add(p.getFurosemide());
+		    	model.addAttribute("medicationData", medicationData);
+
+		    	List<String> comorbidityData = new ArrayList<>();
+		    	comorbidityData.add(p.getSmoking());
+		    	comorbidityData.add(p.getCancer());
+		    	comorbidityData.add(p.getHtn());
+		    	comorbidityData.add(p.getDiabetes());
+		    	comorbidityData.add(p.getDepression());
+		    	model.addAttribute("comorbidityData", comorbidityData);
+
+		    	List<LabTest> labTests = new ArrayList<>();
 		    	if (! (sdate.equals("null") || edate.equals("null"))) {
 			    	Date start = new Date();
 			    	Date end = new Date();
@@ -80,7 +96,7 @@ public class MainController {
 				    } catch (Exception e) {
 
 					}
-			    	model.addAttribute("labTests", getLabTestsByPidWithDate(pid, start, end));
+			    	labTests = getLabTestsByPidWithDate(pid, start, end);
 			    } else if (sdate.equals("null") && ! edate.equals("null")) {
 			    	Date end = new Date();
 			    	try {
@@ -88,7 +104,7 @@ public class MainController {
 				    } catch (Exception e) {
 
 					}
-			    	model.addAttribute("labTests", getLabTestsByPidWithEndDate(pid, end));
+			    	labTests = getLabTestsByPidWithEndDate(pid, end);
 			    } else if (! sdate.equals("null") && edate.equals("null")) {
 			    	Date start = new Date();
 			    	try {
@@ -96,10 +112,23 @@ public class MainController {
 				    } catch (Exception e) {
 
 					}
-			    	model.addAttribute("labTests", getLabTestsByPidWithStartDate(pid, start));
+			    	labTests = getLabTestsByPidWithStartDate(pid, start);
 			    } else {
-			    	model.addAttribute("labTests", getLabTestsByPid(pid));
+			    	labTests = getLabTestsByPid(pid);
 			    }
+			    Collections.sort(labTests);
+			    model.addAttribute("labTests", labTests);
+
+			    List<String> dateLabels = new ArrayList<>();
+			    List<Double> labValues = new ArrayList<>();
+			    for (LabTest lt: labTests) {
+			    	dateLabels.add(lt.getTestDate());
+			    	labValues.add(lt.getLabValue());
+			    }
+			    model.addAttribute("dateLabels", dateLabels);
+			    model.addAttribute("labValues", labValues);
+
+
 		    	return "individual";
 		    } catch (Exception e) {
 
@@ -416,7 +445,10 @@ public class MainController {
 			, @RequestParam Double egfr, @RequestParam Integer date
 			, @RequestParam Double rate, @RequestParam String category
 			, @RequestParam String smoking, @RequestParam String cancer
-			, @RequestParam String pid) {
+			, @RequestParam String pid, @RequestParam String htn
+			, @RequestParam String depression, @RequestParam String diabetes
+			, @RequestParam String asprin, @RequestParam String amitriptyline
+			, @RequestParam String metformin, @RequestParam String furosemide) {
 
 		Patient n = new Patient();
 		n.setPid(pid);
@@ -435,32 +467,42 @@ public class MainController {
 		n.setCategory(category);
 		n.setTestDate(new SimpleDateFormat("yyyy-MM-dd").format(testDate));
 		n.setChangeRate(rate);
+
 		n.setSmoking(smoking);
 		n.setCancer(cancer);
+		n.setHtn(htn);
+		n.setDepression(depression);
+		n.setDiabetes(diabetes);
+
+		n.setAsprin(asprin);
+		n.setAmitriptyline(amitriptyline);
+		n.setMetformin(metformin);
+		n.setFurosemide(furosemide);
+
 		patientRepository.save(n);
 		return "Saved";
 	}
 
-	// @GetMapping(path="/lab")
-	// public @ResponseBody String addNewLabTest (@RequestParam Long pid
-	// 		, @RequestParam String labName, @RequestParam String labUnit
-	// 		, @RequestParam Double labValue, @RequestParam Integer date) {
+	@GetMapping(path="/lab")
+	public @ResponseBody String addNewLabTest (@RequestParam String pid
+			, @RequestParam String labName, @RequestParam String labUnit
+			, @RequestParam Double labValue, @RequestParam Integer date) {
 
-	// 	LabTest n = new LabTest();
-	// 	n.setPid(pid);
-	// 	n.setLabValue(labValue);
-	// 	n.setLabName(labName);
-	// 	n.setLabUnit(labUnit);
+		LabTest n = new LabTest();
+		n.setPid(pid);
+		n.setLabValue(labValue);
+		n.setLabName(labName);
+		n.setLabUnit(labUnit);
 
-	// 	Date testDate = new Date();
-	// 	try {
-	// 		testDate = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(date));
-	// 	} catch (Exception e) {
+		Date testDate = new Date();
+		try {
+			testDate = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(date));
+		} catch (Exception e) {
 
-	// 	}
-	// 	n.setTestDate(testDate);
-	// 	labTestRepository.save(n);
-	// 	return "Saved";
-	// }
+		}
+		n.setTestDate(new SimpleDateFormat("yyyy-MM-dd").format(testDate));
+		labTestRepository.save(n);
+		return "Saved";
+	}
 
 }

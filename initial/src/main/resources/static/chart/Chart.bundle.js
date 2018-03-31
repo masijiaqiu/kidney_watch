@@ -7204,16 +7204,16 @@ defaults._set('doughnut', {
 			},
 			label: function(tooltipItem, data) {
 				var dataLabel = data.labels[tooltipItem.index];
-				var value = ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+				// var value = ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
 
-				if (helpers.isArray(dataLabel)) {
-					// show value on first line of multiline label
-					// need to clone because we are changing the value
-					dataLabel = dataLabel.slice();
-					dataLabel[0] += value;
-				} else {
-					dataLabel += value;
-				}
+				// if (helpers.isArray(dataLabel)) {
+				// 	// show value on first line of multiline label
+				// 	// need to clone because we are changing the value
+				// 	dataLabel = dataLabel.slice();
+				// 	dataLabel[0] += value;
+				// } else {
+				// 	dataLabel += value;
+				// }
 
 				return dataLabel;
 			}
