@@ -163,6 +163,19 @@
 		};
 		barChartData.datasets[0].data = /*[[${scoreDis}]]*/;
 
+		var barChartData2 = {
+			labels: ['Stage 1', 'Stage 2', 'Stage 3A', 'Stage 3B', 'Stage 4'],
+			datasets: [{
+				label: 'Number of Patients',
+				backgroundColor: '#B7D3F2',
+				// borderColor: window.chartColors.red,
+				// borderWidth: 1,
+				data: []
+			}]
+
+		};
+		barChartData2.datasets[0].data = /*[[${stage}]]*/;
+
 		window.onload = function() {
 			makeAllSortable();
 
@@ -178,7 +191,33 @@
 				options: {
 					title: {
 						display: true,
-						text: 'Score Distribution of the Population'
+						text: 'Score Distribution of Patients'
+					},
+					tooltips: {
+						mode: 'index',
+						intersect: false
+					},
+					responsive: true,
+					scales: {
+						xAxes: [{
+							// stacked: true,
+							barThickness : 65,
+						}],
+						yAxes: [{
+							// stacked: true
+						}]
+					}
+				}
+			});
+
+			var ctx2 = document.getElementById('canvas-dist2').getContext('2d');
+			window.myBar2 = new Chart(ctx2, {
+				type: 'bar',
+				data: barChartData2,
+				options: {
+					title: {
+						display: true,
+						text: 'Stage Distribution of Patients'
 					},
 					tooltips: {
 						mode: 'index',
@@ -249,6 +288,10 @@
 	  				</div>
 				</div>
 			</div>
+
+			<div name="mkck main table" id="individual-report" class="fh5co-narrow-chart fh5co-border-bottom row animate-box" data-animate-effect="fadeInLeft">
+	  			<canvas id="canvas-dist2"></canvas>
+	  		</div>
 
 			<div name="mkck main table" id="individual-report" class="fh5co-narrow-chart fh5co-border-bottom row animate-box" data-animate-effect="fadeInLeft">
 	  			<canvas id="canvas-dist"></canvas>

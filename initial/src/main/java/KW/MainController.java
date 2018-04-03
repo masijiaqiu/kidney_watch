@@ -17,6 +17,7 @@ import KW.Patient;
 import KW.PatientRepository;
 import KW.LabTest;
 import KW.LabTestRepository;
+import KW.FlowSheet;
 
 
 @Controller
@@ -48,6 +49,9 @@ public class MainController {
 
 	    int[] scoreDis = getScoreDistribution();
 	    model.addAttribute("scoreDis", scoreDis);
+
+	    int[] stage = countPatientByStage();
+	    model.addAttribute("stage", stage);
 
         return "home";
     }
@@ -131,7 +135,7 @@ public class MainController {
 			    	labTests = getLabTestsByPid(pid);
 			    }
 			    Collections.sort(labTests);
-			    model.addAttribute("labTests", labTests);
+			    // model.addAttribute("labTests", labTests);
 
 			    List<String> egfrDateLabels = new ArrayList<>();
 			    List<String> acrDateLabels = new ArrayList<>();
@@ -150,6 +154,37 @@ public class MainController {
 			    model.addAttribute("egfrValues", egfrValues);
 			    model.addAttribute("acrDateLabels", acrDateLabels);
 			    model.addAttribute("acrValues", acrValues);
+
+			    Map<String, FlowSheet> map = new HashMap<String, FlowSheet>();
+			    for (LabTest lt: labTests) {
+			    	String key = lt.getTestDate();
+			    	if (map.containsKey(key)) {
+			    		FlowSheet temp = map.get(lt.getTestDate());
+			    		if (lt.getLabName().equalsIgnoreCase("egfr")) {
+			    			temp.setEgfr(lt.getLabValue());
+				    	} else if (lt.getLabName().equalsIgnoreCase("acr")) {
+				    		temp.setAcr(lt.getLabValue());
+				    	} else if (lt.getLabName().equalsIgnoreCase("srcr")) {
+				    		temp.setSrcr(lt.getLabValue());
+				    	}
+				    	map.put(key, temp);
+			    	} else {
+				    	FlowSheet temp = new FlowSheet();
+				    	temp.setTestDate(key);
+				    	if (lt.getLabName().equalsIgnoreCase("egfr")) {
+				    		temp.setEgfr(lt.getLabValue());
+				    	} else if (lt.getLabName().equalsIgnoreCase("acr")) {
+				    		temp.setAcr(lt.getLabValue());
+				    	} else if (lt.getLabName().equalsIgnoreCase("srcr")) {
+				    		temp.setSrcr(lt.getLabValue());
+				    	}
+				    	map.put(key, temp);
+				    }
+
+			    }
+			    List<FlowSheet> flowSheets = new ArrayList<>(map.values());
+			    Collections.sort(flowSheets);
+			    model.addAttribute("flowSheets", flowSheets);
 
 		    	return "individual";
 		    } catch (Exception e) {
@@ -179,6 +214,9 @@ public class MainController {
 
 	    int[] scoreDis = getScoreDistributionByCategory("MKCK");
 	    model.addAttribute("scoreDis", scoreDis);
+
+	    int[] stage = countPatientByStageForMKCK();
+	    model.addAttribute("stage", stage);
 
         return "mkck";
     }
@@ -467,6 +505,57 @@ public class MainController {
 	    	}
 	    }
 	    return new int[] {patientsMKCK.size(), patientsPD.size(), patientsHD.size(), patientsAHD.size()};
+	}
+
+	public int[] countPatientByStage(){
+		List<Patient> stage_1 = new ArrayList<>();
+		List<Patient> stage_2 = new ArrayList<>();
+		List<Patient> stage_3a = new ArrayList<>();
+		List<Patient> stage_3b = new ArrayList<>();
+		List<Patient> stage_4 = new ArrayList<>();
+		List<Patient> stage_5 = new ArrayList<>();
+
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getEgfr() < 15) {
+	    		stage_5.add(p);
+	    	} else if (p.getEgfr() < 30) {
+	    		stage_4.add(p);
+	    	} else if (p.getEgfr() < 45) {
+	    		stage_3b.add(p);
+	    	} else if (p.getEgfr() < 60) {
+	    		stage_3a.add(p);
+	    	} else if (p.getEgfr() < 90) {
+	    		stage_2.add(p);
+	    	} else {
+	    		stage_1.add(p);
+	    	}
+	    }
+	    return new int[] {stage_1.size(), stage_2.size(), stage_3a.size(), stage_3b.size(), stage_4.size(), stage_5.size()};
+	}
+
+	public int[] countPatientByStageForMKCK(){
+		List<Patient> stage_1 = new ArrayList<>();
+		List<Patient> stage_2 = new ArrayList<>();
+		List<Patient> stage_3a = new ArrayList<>();
+		List<Patient> stage_3b = new ArrayList<>();
+		List<Patient> stage_4 = new ArrayList<>();
+
+    	Iterable<Patient> iterator = patientRepository.findAll();
+	    for(Patient p: iterator) {
+	    	if (p.getEgfr() < 30) {
+	    		stage_4.add(p);
+	    	} else if (p.getEgfr() < 45) {
+	    		stage_3b.add(p);
+	    	} else if (p.getEgfr() < 60) {
+	    		stage_3a.add(p);
+	    	} else if (p.getEgfr() < 90) {
+	    		stage_2.add(p);
+	    	} else {
+	    		stage_1.add(p);
+	    	}
+	    }
+	    return new int[] {stage_1.size(), stage_2.size(), stage_3a.size(), stage_3b.size(), stage_4.size()};
 	}
 
 	public int[] getScoreDistribution() {

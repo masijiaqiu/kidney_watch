@@ -107,6 +107,19 @@
 		};
 		barChartData2.datasets[0].data = /*[[${scoreDis}]]*/;
 
+		var barChartData3 = {
+			labels: ['Stage 1', 'Stage 2', 'Stage 3A', 'Stage 3B', 'Stage 4', 'Stage 5'],
+			datasets: [{
+				label: 'Number of Patients',
+				backgroundColor: '#B7D3F2',
+				// borderColor: window.chartColors.red,
+				// borderWidth: 1,
+				data: []
+			}]
+
+		};
+		barChartData3.datasets[0].data = /*[[${stage}]]*/;
+
 		window.onload = function() {
 			var ctx = document.getElementById('canvas-dist').getContext('2d');
 			window.myBar = new Chart(ctx, {
@@ -115,7 +128,7 @@
 				options: {
 					title: {
 						display: true,
-						text: 'General Distribution of the Population'
+						text: 'General Distribution of Patients'
 					},
 					tooltips: {
 						mode: 'index',
@@ -141,7 +154,33 @@
 				options: {
 					title: {
 						display: true,
-						text: 'Score Distribution of the Population'
+						text: 'Score Distribution of Patients'
+					},
+					tooltips: {
+						mode: 'index',
+						intersect: false
+					},
+					responsive: true,
+					scales: {
+						xAxes: [{
+							// stacked: true,
+							barThickness : 65,
+						}],
+						yAxes: [{
+							// stacked: true
+						}]
+					}
+				}
+			});
+
+			var ctx3 = document.getElementById('canvas-dist3').getContext('2d');
+			window.myBar3 = new Chart(ctx3, {
+				type: 'bar',
+				data: barChartData3,
+				options: {
+					title: {
+						display: true,
+						text: 'Stage Distribution of Patients'
 					},
 					tooltips: {
 						mode: 'index',
@@ -189,12 +228,12 @@
 		</aside>
 
 		<div id="fh5co-main">
-			<div class="fh5co-narrow-content">
-				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Welcome to KidneyWatch</h2>
-				
-			</div>
 
-			<div class="fh5co-narrow-chart fh5co-border-bottom">
+			<div class="fh5co-narrow-content">
+				<div class="row">
+					<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Welcome to KidneyWatch</h2>
+				</div>
+
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
 					<div name="mkck intro" class="row">
 						<li th:text="${total} + ' patients in total (Male: ' + ${male} + '; Female: ' + ${female} + ')'"/>
@@ -206,6 +245,10 @@
 
 			<div name="mkck main table" id="individual-report" class="fh5co-narrow-chart fh5co-border-bottom row animate-box" data-animate-effect="fadeInLeft">
 	  			<canvas id="canvas-dist"></canvas>
+	  		</div>
+
+	  		<div name="mkck main table" id="individual-report" class="fh5co-narrow-chart fh5co-border-bottom row animate-box" data-animate-effect="fadeInLeft">
+	  			<canvas id="canvas-dist3"></canvas>
 	  		</div>
 
 	  		<div name="mkck main table" id="individual-report" class="fh5co-narrow-chart fh5co-border-bottom row animate-box" data-animate-effect="fadeInLeft">

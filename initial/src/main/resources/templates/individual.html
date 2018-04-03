@@ -408,18 +408,26 @@
 						<table class="pop-table" border="0">
 						  <thead>
 							<tr>
-								<th>Lab Name</th>
 								<th>Date</th>
-								<th>Value</th>
-								<th>Unit</th>
+								<th>eGFR</th>
+								<th>ACR</th>
+								<th>SrCr</th>
+								<th>Test A</th>
+								<th>Test B</th>
+								<th>Test C</th>
+								<th>Test D</th>
 							</tr>
 						  </thead>
 						  <tbody>
-							<tr th:each="re:${labTests}">
-								<td th:text="${re.labName}" />
+							<tr th:each="re:${flowSheets}">
 								<td th:text="${re.testDate}" />
-								<td th:text="${re.labValue}" />
-								<td th:text="${re.labUnit}" />
+								<td th:text="${re.egfr}" />
+								<td th:text="${re.acr}" />
+								<td th:text="${re.srcr}" />
+								<td />
+								<td />
+								<td />
+								<td />
 							</tr>
 						  </tbody>
 						</table>

@@ -22,6 +22,8 @@ curl 'localhost:8080/lab?pid=100A&labName=ACR&labValue=300&labUnit=&date=2017032
 curl 'localhost:8080/lab?pid=100A&labName=ACR&labValue=403&labUnit=&date=20170320&labUnit=%B5g%2Fmg'
 curl 'localhost:8080/lab?pid=100A&labName=ACR&labValue=324&labUnit=&date=20170318&labUnit=%B5g%2Fmg'
 
+curl 'localhost:8080/lab?pid=100A&labName=ACR&labValue=324&labUnit=&date=20170311&labUnit=%B5g%2Fmg'
+
 
 MKCK (pre-dialysis patients) eGFR > 15
 PD (peritoneal dialysis patients)
