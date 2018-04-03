@@ -1146,9 +1146,11 @@ table.pop-table {
   text-align: left;
   border-collapse: collapse;
 }
-table.pop-table td, table.pop-table th {
+table.pop-table td,th {
+  
+  text-align: left;
   border: 1px solid #AAAAAA;
-  padding: 3px 2px;
+  padding: 5px 40px;
 }
 table.pop-table tbody td {
   font-size: 13px;
@@ -1172,7 +1174,7 @@ table.pop-table thead th:first-child {
   border-left: none;
 }
 
-table.pop-table tfoot td {
+/*table.pop-table tfoot td {
   font-size: 14px;
 }
 table.pop-table tfoot .links {
@@ -1184,5 +1186,5 @@ table.pop-table tfoot .links a{
   color: #FFFFFF;
   padding: 2px 8px;
   border-radius: 5px;
-}
+}*/
 /*# sourceMappingURL=style.css.map */
