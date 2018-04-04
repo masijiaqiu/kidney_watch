@@ -349,7 +349,7 @@
 
 		<div id="fh5co-main">
 			<div class="fh5co-narrow-content">
-				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Welcome to KidneyWatch</h2>
+				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft" th:text=" 'Patient Details: ' + ${patients.firstName} + ' ' + ${patients.lastName}" />
 
 				<div class="animate-box">
 
@@ -398,27 +398,45 @@
 	  					<canvas id="canvas-line2"></canvas>
 	  				</div>
 
-					<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
-	  					<canvas id="canvas-pie1"></canvas>
-	  				</div>
+	  				<div class="fh5co-narrow-content fh5co-border-bottom">
+						<div class="row animate-box" data-animate-effect="fadeInLeft">
+							<div name="mkck main table" id="individual-report" class="column_2">
+			  					<canvas id="canvas-pie1"></canvas>
+			  				</div>
 
-	  				<div name="mkck main table" id="individual-report" class="fh5co-narrow-content fh5co-border-bottom row">
-	  					<canvas id="canvas-pie2"></canvas>
-	  				</div>
+			  				<div name="mkck main table" id="individual-report" class="column_2">
+			  					<canvas id="canvas-pie2"></canvas>
+			  				</div>
+						</div>
+					</div>
 
 					<div name="mkck main table" id="lab-results" class="fh5co-narrow-table fh5co-border-bottom row">
-						<div style="overflow:scroll;" >
+						<div style="overflow:scroll; white-space: nowrap;" >
 						<table class="pop-table" border="0">
 						  <thead>
 							<tr>
 								<th>Date</th>
 								<th>eGFR</th>
 								<th>ACR</th>
-								<th>SrCr</th>
-								<th>Test A</th>
-								<th>Test B</th>
-								<th>Test C</th>
-								<th>Test D</th>
+								<th>Serum Creatinine</th>
+								<th>Urinalysis: PH</th>
+								<th>Urinalysis: Red Blood Cells</th>
+								<th>Urinalysis: White Blood Cells</th>
+								<th>Urinalysis: Specific Gravity</th>
+								<th>Metabolic: Glucose</th>
+								<th>Metabolic: Calcium</th>
+							</tr>
+							<tr>
+						  		<th/></th>
+						  		<th/>mL/min</th>
+								<th/>μg/mg</th>
+								<th/>μmol/L</th>
+								<th/></th>
+								<th/>rbc/hpf</th>
+						  		<th/>wbc/hpf</th>
+								<th/></th>
+								<th/>mg/dL</th>
+								<th/>mg/dL</th>
 							</tr>
 						  </thead>
 						  <tbody>
@@ -431,18 +449,13 @@
 								<td />
 								<td />
 								<td />
+								<td />
+								<td />
 							</tr>
 						  </tbody>
 						</table>
 						</div>
 					</div>
-
-
-
-
-
-
-
 				</div>
 			</div>
 		</div>

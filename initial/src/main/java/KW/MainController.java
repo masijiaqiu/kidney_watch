@@ -145,7 +145,7 @@ public class MainController {
 			    	if (lt.getLabName().equalsIgnoreCase("eGFR")) {
 				    	egfrDateLabels.add(lt.getTestDate());
 				    	egfrValues.add(lt.getLabValue());
-				    } else {
+				    } else if (lt.getLabName().equalsIgnoreCase("ACR")){
 				    	acrDateLabels.add(lt.getTestDate());
 				    	acrValues.add(lt.getLabValue());
 				    }
@@ -669,15 +669,15 @@ public class MainController {
 		n.setDob(dob);
 		n.setEgfr(egfr);
 
-		Date testDate = new Date();
-		try {
-			testDate = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(date));
-		} catch (Exception e) {
+		// Date testDate = new Date();
+		// try {
+		// 	testDate = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(date));
+		// } catch (Exception e) {
 
-		}
+		// }
 
 		n.setCategory(category);
-		n.setTestDate(new SimpleDateFormat("yyyy-MM-dd").format(testDate));
+		// n.setTestDate(new SimpleDateFormat("yyyy-MM-dd").format(testDate));
 		n.setChangeRate(rate);
 
 		n.setSmoking(smoking);

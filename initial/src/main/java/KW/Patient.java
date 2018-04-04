@@ -29,8 +29,8 @@ public class Patient {
 
     @Column(name="egfr")
     private Double egfr;
-    @Column(name="testDate")
-    private String testDate;
+    // @Column(name="testDate")
+    // private String testDate;
     @Column(name="changeRate")
     private Double changeRate;
 
@@ -99,8 +99,8 @@ public class Patient {
 
 	public Double getEgfr() {return this.egfr;}
 	public void setEgfr(Double egfr) {this.egfr = egfr;}
-	public String getTestDate() {return this.testDate;}
-	public void setTestDate(String testDate) {this.testDate = testDate;}
+	// public String getTestDate() {return this.testDate;}
+	// public void setTestDate(String testDate) {this.testDate = testDate;}
 	public Double getChangeRate() {return this.changeRate;}
 	public void setChangeRate(Double changeRate) {this.changeRate = changeRate;}
 

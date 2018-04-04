@@ -6,7 +6,7 @@ mysql -u root -p
 
 create database db_health;
 create user 'health' identified by '792';
-mysql> grant all on db_health.* to 'healtht'; 
+grant all on db_health.* to 'healtht'; 
 
 
 curl 'localhost:8080/add?pid=100A&name=Jane&gender=F&dob=1980-01-01&egfr=20&date=20170323&rate=-3&cancer=Yes&smoking=No&htn=Yes&depression=No&diabetes=Yes&category=MKCK&asprin=Yes&amitriptyline=No&metformin=Yes&furosemide=Yes'

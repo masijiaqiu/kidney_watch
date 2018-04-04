@@ -1146,18 +1146,20 @@ table.pop-table {
   text-align: left;
   border-collapse: collapse;
 }
-table.pop-table td,th {
-  
+table.pop-table td, th {
   text-align: left;
   border: 1px solid #AAAAAA;
-  padding: 5px 40px;
+  padding: 3px 2px;
 }
 table.pop-table tbody td {
   font-size: 13px;
 }
-table.pop-table tr:nth-child(even) {
+table.pop-table tbody tr:nth-child(even) {
   background: #E3F3FF;
 }
+/*table.pop-table thead tr:nth-child(2) {
+  background: #1C6EA4;
+}*/
 table.pop-table thead {
   background: #1C6EA4;
   background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);

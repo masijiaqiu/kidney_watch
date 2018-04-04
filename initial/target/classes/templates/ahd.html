@@ -99,9 +99,9 @@
 		
 		$(function(){
 		  $("tr").each(function(){
-		    var col_val = $(this).find("td:eq(6)").text();
+		    var col_val = $(this).find("td:eq(5)").text();
 		    if (col_val < 0){
-		      $(this).find("td:eq(6)").css('background-color','#FFB9B9'); 
+		      $(this).find("td:eq(5)").css('background-color','#FFB9B9'); 
 		    } 
 		  });
 		});
@@ -257,6 +257,7 @@
 			<div class="fh5co-narrow-content fh5co-border-bottom">
 				<div class="row animate-box" data-animate-effect="fadeInLeft">
 					<div name="mkck main table" class="row">
+						<div style="overflow:scroll; white-space: nowrap;" >
 						<table class="pop-table" border="0">
 						  <thead>
 							<tr>
@@ -293,6 +294,7 @@
 							</tr>
 						  </tbody>
 						</table>
+						</div>
 					</div>
 				</div>
 			</div>
