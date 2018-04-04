@@ -62,6 +62,13 @@ INSERT INTO db_health.Patient (id, pid, first_name, last_name, gender, dob, cate
 VALUES (20, "100100100PE", "Richard", "Ball", "M", "1964-07-26", "PD", 1, 23, 13, "No", "No", "Yes", "No", "No", "Yes", "No", "No", "Yes");
 
 
+INSERT INTO db_health.Patient (id, pid, first_name, last_name, gender, dob, category, score, egfr, change_rate, cancer, smoking, htn, diabetes, depression, asprin, amitriptyline, metformin, furosemide)
+VALUES (21, "100100100MF", "Jack", "Doe", "M", "1972-04-03", "MKCK", 4, 63, -2, "No", "No", "Yes", "No", "No", "Yes", "No", "No", "Yes");
+
+INSERT INTO db_health.Patient (id, pid, first_name, last_name, gender, dob, category, score, egfr, change_rate, cancer, smoking, htn, diabetes, depression, asprin, amitriptyline, metformin, furosemide)
+VALUES (22, "100100100MG", "Jane", "Doe", "F", "1975-04-03", "MKCK", 4, 65, -5, "No", "No", "Yes", "No", "No", "Yes", "No", "No", "Yes");
+
+
 INSERT INTO db_health.lab_test (id, pid, lab_name, lab_value, test_date)
 VALUES (1, "100100100MD", "eGFR", 33, "2017-03-18");
 
