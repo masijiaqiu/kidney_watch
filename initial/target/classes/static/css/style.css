@@ -1157,9 +1157,6 @@ table.pop-table tbody td {
 table.pop-table tbody tr:nth-child(even) {
   background: #E3F3FF;
 }
-/*table.pop-table thead tr:nth-child(2) {
-  background: #1C6EA4;
-}*/
 table.pop-table thead {
   background: #1C6EA4;
   background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
